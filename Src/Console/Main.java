@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        String filename = "json/judgments-348.json";
+        String filename = "jsonData/judgments-348.json";
         try (FileReader reader = new FileReader(filename)) {
             JsonReader jsonReader = Json.createReader(reader);
             JsonObject object = jsonReader.readObject();
