@@ -1,4 +1,4 @@
-package Judgements;
+package court;
 
 public enum JudgementType {
     DECISION, // postanowienie
@@ -9,6 +9,7 @@ public enum JudgementType {
 
     REGULATION, // zarządzenie
 
-    REASONS, // uzasadnienie, system źródłowy orzeczeń sądów powszechnych czasem dzieli orzeczenie na dwa odrębne:
+    REASONS; // uzasadnienie, system źródłowy orzeczeń sądów powszechnych czasem dzieli orzeczenie na dwa odrębne:
     // orzeczenie i jego uzasadnienie
+
 }

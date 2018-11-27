@@ -1,4 +1,4 @@
-package Court;
+package court;
 
 public enum CourtType {
     COMMON, // sąd powszechny
@@ -9,5 +9,6 @@ public enum CourtType {
 
     CONSTITUTIONAL_TRIBUNAL, // Trybunał Konstytucyjny
 
-    NATIONAL_APPEAL_CHAMBER // Krajowa Izba Odwoławcza
+    NATIONAL_APPEAL_CHAMBER; // Krajowa Izba Odwoławcza
+
 }
