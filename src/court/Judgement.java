@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourtRuling implements Serializable
+public class Judgement implements Serializable
 {
 
     @SerializedName("id")
@@ -79,7 +79,7 @@ public class CourtRuling implements Serializable
      * No args constructor for use in serialization
      *
      */
-    public CourtRuling() {
+    public Judgement() {
     }
 
     /**
@@ -105,7 +105,7 @@ public class CourtRuling implements Serializable
      * @param judgmentResult
      * @param referencedRegulations
      */
-    public CourtRuling(int id, String courtType, List<CourtCase> courtCases, String judgmentType, List<Judge> judges, Source source, List<String> courtReporters, String decision, String summary, String textContent, List<String> legalBases, List<ReferencedRegulation> referencedRegulations, List<String> keywords, List<ReferencedCourtCase> referencedCourtCases, String receiptDate, String meansOfAppeal, String judgmentResult, List<String> lowerCourtJudgments, List<DissentingOpinion> dissentingOpinions, String judgmentDate) {
+    public Judgement(int id, String courtType, List<CourtCase> courtCases, String judgmentType, List<Judge> judges, Source source, List<String> courtReporters, String decision, String summary, String textContent, List<String> legalBases, List<ReferencedRegulation> referencedRegulations, List<String> keywords, List<ReferencedCourtCase> referencedCourtCases, String receiptDate, String meansOfAppeal, String judgmentResult, List<String> lowerCourtJudgments, List<DissentingOpinion> dissentingOpinions, String judgmentDate) {
         super();
         this.id = id;
         this.courtType = CourtType.valueOf(courtType);
@@ -304,10 +304,10 @@ public class CourtRuling implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof CourtRuling) == false) {
+        if (!(other instanceof Judgement)) {
             return false;
         }
-        CourtRuling rhs = ((CourtRuling) other);
+        Judgement rhs = ((Judgement) other);
         return new EqualsBuilder().append(summary, rhs.summary).append(keywords, rhs.keywords).append(textContent, rhs.textContent).append(meansOfAppeal, rhs.meansOfAppeal).append(judges, rhs.judges).append(courtType, rhs.courtType).append(legalBases, rhs.legalBases).append(judgmentDate, rhs.judgmentDate).append(dissentingOpinions, rhs.dissentingOpinions).append(lowerCourtJudgments, rhs.lowerCourtJudgments).append(decision, rhs.decision).append(referencedCourtCases, rhs.referencedCourtCases).append(id, rhs.id).append(receiptDate, rhs.receiptDate).append(courtReporters, rhs.courtReporters).append(judgmentType, rhs.judgmentType).append(source, rhs.source).append(courtCases, rhs.courtCases).append(judgmentResult, rhs.judgmentResult).append(referencedRegulations, rhs.referencedRegulations).isEquals();
     }
 
