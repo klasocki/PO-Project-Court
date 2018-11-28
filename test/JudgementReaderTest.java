@@ -37,4 +37,16 @@ public class JudgementReaderTest {
             Judgement judgement = judgementReader.readSingle("filefilehey.json", 0);
         });
     }
+
+    @Test
+    void readAllTest() throws IOException{
+        String[] files = {testFile};
+        var judgementReader = new JudgementReader();
+        var judgement = judgementReader.readSingle(testFile, 0);
+        var judementsAllFiles = judgementReader.readAll(files);
+        var judgementsOneFile = judgementReader.readAll(testFile);
+        assertEquals(judementsAllFiles, judgementsOneFile);
+        assertTrue(judementsAllFiles.containsValue(judgement) && judgementsOneFile.containsValue(judgement));
+        assertTrue(judementsAllFiles.containsKey(judgement.getId()) && judgementsOneFile.containsKey(judgement.getId()));
+    }
 }
