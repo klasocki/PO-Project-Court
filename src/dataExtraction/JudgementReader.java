@@ -1,4 +1,4 @@
-package dataManipulation;
+package dataExtraction;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -8,6 +8,7 @@ import court.Judgement;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JudgementReader {
@@ -29,7 +30,7 @@ public class JudgementReader {
         return result;
     }
 
-    public Map<Integer, Judgement> readAll(String[] files) throws IOException {
+    public Map<Integer, Judgement> readAll(List<String> files) throws IOException {
         var result = new LinkedHashMap<Integer, Judgement>();
         for (String filePath : files) {
             result.putAll(readAll(filePath));

@@ -1,4 +1,6 @@
-import dataManipulation.JudgementReader;
+package dataExtraction;
+
+import dataExtraction.JudgementReader;
 import court.CourtCase;
 import court.DissentingOpinion;
 import court.Judge;
@@ -8,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +44,7 @@ public class JudgementReaderTest {
 
     @Test
     void readAllTest() throws IOException{
-        String[] files = {testFile};
+        List<String> files = new ArrayList<String>(Collections.singleton(testFile));
         var judgementReader = new JudgementReader();
         var judgement = judgementReader.readSingle(testFile, 0);
         var judementsAllFiles = judgementReader.readAll(files);
