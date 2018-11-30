@@ -1,4 +1,5 @@
 Czy nazwa paczki musi byc reverse dns
-Czy obiekt musi (może) dokładnie odzwierciedlać jsona
 Co jest judgement, a co jest ruling
 Czy walidowac keywords, czy wystarczy String
+Co to znaczy edytować polecenia
+Czy mogą być polecenia bez argumentów
