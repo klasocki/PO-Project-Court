@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JudgementReaderTest {
-    final String testFile = "test/testJudgement.json";
+    final String testFile = "test/dataExtraction/testJudgement.json";
 
     @Test
     void readTest() throws IOException {
