@@ -129,6 +129,10 @@ public class Judgement implements Serializable
         this.judgmentDate = judgmentDate;
     }
 
+    public String getKey() {
+        return courtCases.get(0).getCaseNumber();
+    }
+
     public int getId() {
         return id;
     }
