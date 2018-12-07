@@ -12,6 +12,10 @@ public class TextContent {
     }
 
     public String getTC(String key) {
-        return judgements.get(key).getTextContent();
+        var judgement = judgements.get(key);
+        if (judgement == null) {
+                    throw new IllegalArgumentException("Nie znaleziono orzeczenia o sygnaturze " + key);
+        }
+        return judgement.getTextContent();
     }
 }

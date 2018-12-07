@@ -1,6 +1,6 @@
 package pl.edu.agh.model;
 
-public enum JudgementType {
+public enum JudgmentType {
     DECISION, // postanowienie
 
     RESOLUTION, // uchwała

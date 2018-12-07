@@ -4,6 +4,7 @@ import pl.edu.agh.model.CourtType;
 import pl.edu.agh.model.Judge;
 import pl.edu.agh.model.Judgement;
 
+import java.util.List;
 import java.util.Map;
 
 public class Rubrum {
@@ -15,6 +16,9 @@ public class Rubrum {
 
     public String getRubrum(String key) {
         var judgement = judgements.get(key);
+        if (judgement == null) {
+            throw new IllegalArgumentException("Nie znaleziono orzeczenia o sygnaturze " + key);
+        }
         var builder = new StringBuilder();
         for (var judge : judgement.getJudges()) {
             builder.append("\n").append(judge.getName()).append(" - ");
@@ -29,5 +33,15 @@ public class Rubrum {
                 +"\nRodzaj sądu: " + judgement.getCourtType().toString()
                 +"\nSędziowie: " +
                 builder.toString();
+    }
+
+    public String getRubrum(List<String> keys) throws IllegalArgumentException{
+        var builder = new StringBuilder();
+        var prefix = "";
+        for (var key : keys) {
+            builder.append(getRubrum(key)).append(prefix);
+            prefix = "\n***************";
+        }
+        return builder.toString();
     }
 }

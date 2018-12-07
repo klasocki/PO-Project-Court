@@ -27,7 +27,7 @@ public class Judgement implements Serializable
     private List<CourtCase> courtCases = new ArrayList<CourtCase>();
     @SerializedName("judgmentType")
     @Expose
-    private JudgementType judgmentType;
+    private JudgmentType judgmentType;
     @SerializedName("judges")
     @Expose
     private List<Judge> judges = new ArrayList<Judge>();
@@ -113,7 +113,7 @@ public class Judgement implements Serializable
         this.id = id;
         this.courtType = CourtType.valueOf(courtType);
         this.courtCases = courtCases;
-        this.judgmentType = JudgementType.valueOf(judgmentType);
+        this.judgmentType = JudgmentType.valueOf(judgmentType);
         this.judges = judges;
         this.source = source;
         this.courtReporters = courtReporters;
@@ -160,12 +160,12 @@ public class Judgement implements Serializable
         this.courtCases = courtCases;
     }
 
-    public JudgementType getJudgmentType() {
+    public JudgmentType getJudgmentType() {
         return judgmentType;
     }
 
     public void setJudgmentType(String judgmentType) {
-        this.judgmentType = JudgementType.valueOf(judgmentType);
+        this.judgmentType = JudgmentType.valueOf(judgmentType);
     }
 
     public List<Judge> getJudges() {

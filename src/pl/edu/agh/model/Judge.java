@@ -1,3 +1,4 @@
+//TODO override toString in SpecialRoles
 
 package pl.edu.agh.model;
 
