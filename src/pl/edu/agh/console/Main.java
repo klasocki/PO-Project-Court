@@ -1,10 +1,6 @@
-package console;
-
-import dataExtraction.FileLister;
+package pl.edu.agh.console;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 public class Main {
 

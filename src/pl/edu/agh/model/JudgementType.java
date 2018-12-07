@@ -1,4 +1,4 @@
-package court;
+package pl.edu.agh.model;
 
 public enum JudgementType {
     DECISION, // postanowienie

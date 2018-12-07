@@ -1,8 +1,6 @@
-package dataExtraction;
+package pl.edu.agh.dataExtraction;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
 
 
 public class FileLister {

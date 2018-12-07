@@ -1,15 +1,14 @@
-package dataExtraction;
+package pl.edu.agh.dataExtraction;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import court.Judgement;
+import pl.edu.agh.model.Judgement;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class JudgementReader {

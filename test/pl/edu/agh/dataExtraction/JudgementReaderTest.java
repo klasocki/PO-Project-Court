@@ -1,23 +1,20 @@
-package dataExtraction;
+package pl.edu.agh.dataExtraction;
 
-import dataExtraction.JudgementReader;
-import court.CourtCase;
-import court.DissentingOpinion;
-import court.Judge;
-import court.Judgement;
+import pl.edu.agh.model.CourtCase;
+import pl.edu.agh.model.DissentingOpinion;
+import pl.edu.agh.model.Judge;
+import pl.edu.agh.model.Judgement;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JudgementReaderTest {
-    private final File testFile = new File("test/dataExtraction/testJudgement.json");
+    private final File testFile = new File("test/pl/edu/agh/dataExtraction/testJudgement.json");
 
     @Test
     void readSingleTest() throws IOException {

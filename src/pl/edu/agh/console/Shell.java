@@ -1,8 +1,6 @@
-package console;
+package pl.edu.agh.console;
 
-import java.io.PrintWriter;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.jline.reader.*;
 import org.jline.reader.impl.completer.*;
