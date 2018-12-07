@@ -3,7 +3,6 @@ package pl.edu.agh.commands;
 import pl.edu.agh.model.Judgement;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.Collections.reverseOrder;
 
@@ -15,17 +14,14 @@ public class TopTenJudges {
     }
 
     public String getTopTen() {
-        var judges = new HashMap<String, Integer>();
+        var judgesJudgementCount = new HashMap<String, Integer>();
+        var mapUtils = new MapUtils<String, Integer>(); //helper object
         for (var judgement : judgements.values()) {
             for (var judge : judgement.getJudges()) {
-                // This adds pair (name, 1) to the judges map is no entry is present,
-                // otherwise increments the existing counter
-                judges.merge(judge.getName(), 1, Integer::sum);
+                mapUtils.incrValue(judgesJudgementCount, judge.getName());
             }
         }
-        //sorting map by number of judgments and taking first 10 values
-        Map<String, Integer> sortedMap = judges.entrySet().stream().sorted(reverseOrder(Map.Entry.comparingByValue())).limit(10)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        Map<String, Integer> sortedMap = mapUtils.getTopValues(judgesJudgementCount, 10);
         //building return string (without StringBuilder, cause its guaranteed to run 10 times)
         String result = "";
         for (var entry : sortedMap.entrySet()) {
