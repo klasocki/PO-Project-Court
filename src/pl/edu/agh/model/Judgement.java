@@ -1,3 +1,5 @@
+// TODO date format should be checked while instantiating
+
 package pl.edu.agh.model;
 
 import com.google.gson.annotations.Expose;
@@ -7,6 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -245,8 +248,8 @@ public class Judgement implements Serializable
         this.referencedCourtCases = referencedCourtCases;
     }
 
-    public String getReceiptDate() {
-        return receiptDate;
+    public LocalDate getReceiptDate() {
+        return LocalDate.parse(receiptDate);
     }
 
     public void setReceiptDate(String receiptDate) {
@@ -285,8 +288,8 @@ public class Judgement implements Serializable
         this.dissentingOpinions = dissentingOpinions;
     }
 
-    public String getJudgmentDate() {
-        return judgmentDate;
+    public LocalDate getJudgmentDate(){
+        return LocalDate.parse(this.judgmentDate);
     }
 
     public void setJudgmentDate(String judgmentDate) {
