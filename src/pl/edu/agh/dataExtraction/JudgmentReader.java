@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class JudgementReader {
+public class JudgmentReader {
     public Judgement readSingle(File file, int index) throws IOException, IndexOutOfBoundsException{
         var gson = new Gson();
         var jsonArray = readJsonArray(file);
