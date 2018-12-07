@@ -61,7 +61,7 @@ import org.jline.utils.*;
     }
 
     private void printHelp() {
-        System.out.println("help		- Show help");
+        System.out.println("help		- Pokaż pomoc");
         System.out.println("action1		- Execute action1");
         System.out.println("action2		- Execute action2");
         System.out.println("exit        - Exit the app");
