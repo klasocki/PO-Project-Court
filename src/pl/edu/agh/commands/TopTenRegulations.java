@@ -22,6 +22,7 @@ public class TopTenRegulations {
             }
         }
 
-        return mapUtils.getStringTopValues(regulationsJudgementCount, 10);
+        return "Najczęściej przywoływane ustawy\n" +
+                mapUtils.getStringTopValues(regulationsJudgementCount, 10, " - ");
     }
 }

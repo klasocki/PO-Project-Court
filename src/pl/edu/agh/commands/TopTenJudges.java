@@ -22,7 +22,8 @@ public class TopTenJudges {
                 mapUtils.incrValue(judgesJudgementCount, judge.getName());
             }
         }
-        return mapUtils.getStringTopValues(judgesJudgementCount, 10);
+        return "Sędziowie z największą liczbą wydanych orzeczeń\n" +
+                mapUtils.getStringTopValues(judgesJudgementCount, 10, " - ");
     }
 
 }

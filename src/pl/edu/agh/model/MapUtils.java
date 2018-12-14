@@ -17,12 +17,12 @@ public class MapUtils<K,V> {
     public void incrValue(HashMap<K, Integer> map, K key) {
         map.merge(key, 1, Integer::sum);
     }
-    public String getStringTopValues(HashMap<K, Integer> judgesJudgementCount, int n) {
+    public String getStringTopValues(HashMap<K, Integer> judgesJudgementCount, int n, String separator) {
         Map<K, Integer> sortedMap = getTopValues(judgesJudgementCount, n);
         //building return string (without StringBuilder, cause its guaranteed to run 10 times)
         String result = "";
         for (var entry : sortedMap.entrySet()) {
-            result+=entry.getKey() + " - " + entry.getValue() +"\n";
+            result+=entry.getKey() + separator + entry.getValue() +"\n";
         }
         return result;
     }
