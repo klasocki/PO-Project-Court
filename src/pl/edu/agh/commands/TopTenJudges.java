@@ -1,6 +1,7 @@
 package pl.edu.agh.commands;
 
 import pl.edu.agh.model.Judgement;
+import pl.edu.agh.model.MapUtils;
 
 import java.util.*;
 
@@ -21,13 +22,7 @@ public class TopTenJudges {
                 mapUtils.incrValue(judgesJudgementCount, judge.getName());
             }
         }
-        Map<String, Integer> sortedMap = mapUtils.getTopValues(judgesJudgementCount, 10);
-        //building return string (without StringBuilder, cause its guaranteed to run 10 times)
-        String result = "";
-        for (var entry : sortedMap.entrySet()) {
-            result+=entry.getKey() + " - " + entry.getValue() +"\n";
-        }
-        return result;
+        return mapUtils.getStringTopValues(judgesJudgementCount, 10);
     }
 
 }

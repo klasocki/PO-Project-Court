@@ -1,6 +1,7 @@
 package pl.edu.agh.commands;
 
 import pl.edu.agh.model.Judgement;
+import pl.edu.agh.model.MapUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,12 +21,7 @@ public class TopTenRegulations {
                 mapUtils.incrValue(regulationsJudgementCount, regulation.getJournalTitle());
             }
         }
-        Map<String, Integer> sortedMap = mapUtils.getTopValues(regulationsJudgementCount, 10);
-        //building return string (without StringBuilder, cause its guaranteed to run 10 times)
-        String result = "";
-        for (var entry : sortedMap.entrySet()) {
-            result+=entry.getKey() + " - " + entry.getValue() +"\n";
-        }
-        return result;
+
+        return mapUtils.getStringTopValues(regulationsJudgementCount, 10);
     }
 }
