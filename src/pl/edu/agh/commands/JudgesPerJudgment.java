@@ -20,6 +20,7 @@ public class JudgesPerJudgment {
         for (var judgment : judgements.values()) {
                 mapUtils.incrValue(judgementsNumberForJudgesNumber, judgment.getJudges().size());
         }
+        //Max value used to list "infinity" top values
         return "Liczba orzeczeń wydanych przez skład z określoną liczbą sędziów\n"
         + mapUtils.getStringTopValues(judgementsNumberForJudgesNumber, Integer.MAX_VALUE, ": ");
     }
