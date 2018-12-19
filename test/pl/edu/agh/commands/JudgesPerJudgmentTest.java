@@ -22,7 +22,7 @@ class JudgesPerJudgmentTest {
 
 
         var reader = new JudgmentReader();
-        judgments = reader.readAll(FileLister.listFiles(new File("jsonData"), ".json"));
+        judgments = reader.readAll(FileLister.listFiles("jsonData", ".json"));
         command = new JudgesPerJudgment(judgments);
         System.out.println(command.getStats());
     }

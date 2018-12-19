@@ -14,7 +14,7 @@ class TopTenRegulationsTest {
     @Test
     void getTopTen() throws IOException {
         var reader = new JudgmentReader();
-        var judgments = reader.readAll(FileLister.listFiles(new File("jsonData"), ".json"));
+        var judgments = reader.readAll(FileLister.listFiles("jsonData", ".json"));
         var command = new TopTenRegulations(judgments);
         System.out.println(command.getTopTen());
     }

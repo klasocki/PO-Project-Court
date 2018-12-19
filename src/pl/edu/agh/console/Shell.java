@@ -67,7 +67,7 @@ import org.jline.utils.*;
         }
         catch (EndOfFileException e) {
             // e.g. ^D
-            System.err.println("Error reading line");
+            System.err.println("Reading line interrupted");
             return null;
         }
     }

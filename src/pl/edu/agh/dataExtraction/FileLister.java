@@ -8,16 +8,16 @@ import java.nio.file.Paths;
 
 
 public class FileLister {
-    public static File[] listFiles(File folder, String endingWith) throws IllegalArgumentException, IOException {
+    public static File[] listFiles(String folder, String endingWith) throws IllegalArgumentException, IOException {
 
-        File[] filesFiltered = Files.walk(Paths.get(folder.getPath()))
+        File[] filesFiltered = Files.walk(Paths.get(folder))
                 .filter(Files::isRegularFile)
                 .map(Path::toFile)
                 .filter(f -> f.getName().endsWith(endingWith))
                 .toArray(File[]::new);
 
         if (filesFiltered.length == 0) {
-            throw new IllegalArgumentException("No files in directory " + folder.getPath() + " end with: " + endingWith);
+            throw new IllegalArgumentException("No files in directory " + folder + " end with: " + endingWith);
         }
         return filesFiltered;
     }
