@@ -8,55 +8,42 @@ import org.jline.utils.*;
 
 
  class Shell {
-    private String[] commandsList = { "help", "action1", "action2", "exit" };
+     private String[] commandsList;
+
+     public Shell(String[] commandsList) {
+         this.commandsList = commandsList;
+     }
 
     void run() {
         printWelcomeMessage();
-        LineReaderBuilder readerBuilder = LineReaderBuilder.builder();
-        var completers = new LinkedList<Completer>();
-
-        completers.add(new StringsCompleter(commandsList));
-        readerBuilder.completer(new ArgumentCompleter(completers));
-
-        LineReader reader = readerBuilder.build();
+        LineReader reader = prepareLineReader();
 
         String line;
-
         while ((line = readLine(reader, "orzeczenia")) != null) {
-            switch (line) {
+            var words = line.split("\\s+");
+            switch (words[0]) {
                 case "help":
                     printHelp();
                     break;
-                case "action1": {
-                    AttributedStringBuilder a = new AttributedStringBuilder()
-                            .append("You have selected ")
-                            .append("action1", AttributedStyle.BOLD.foreground(AttributedStyle.RED))
-                            .append("!");
-
-                    System.out.println(a);
-                    break;
-                }
-                case "action2": {
-                    AttributedStringBuilder a = new AttributedStringBuilder()
-                            .append("You have selected ")
-                            .append("action2", AttributedStyle.BOLD.foreground(AttributedStyle.RED))
-                            .append("!");
-
-                    System.out.println(a);
-                    break;
-                }
                 case "exit":
                     System.out.println("Wychodzę z aplikacji...");
                     return;
                 default:
-                    System.out.println("Zła komenda. W celu uzyskania pomocy wćiśnij TAB lub wpisz \"help\" i wciśnij ENTER.");
                     break;
             }
         }
 
     }
 
-    private void printWelcomeMessage() {
+     private LineReader prepareLineReader() {
+         LineReaderBuilder readerBuilder = LineReaderBuilder.builder();
+         var completers = new LinkedList<Completer>();
+         completers.add(new StringsCompleter(commandsList));
+         readerBuilder.completer(new ArgumentCompleter(completers));
+         return readerBuilder.build();
+     }
+
+     private void printWelcomeMessage() {
         System.out.println("Witaj w programie orzeczenia. W celu uzyskania pomocy wćiśnij TAB lub wpisz \"help\" i wciśnij ENTER.");
     }
 
@@ -70,7 +57,7 @@ import org.jline.utils.*;
 
     private String readLine(LineReader reader, String promtMessage) {
         try {
-            String line = reader.readLine(promtMessage + " shell> ");
+            String line = reader.readLine(promtMessage + " > ");
             return line.trim();
         }
         catch (UserInterruptException e) {
@@ -80,6 +67,7 @@ import org.jline.utils.*;
         }
         catch (EndOfFileException e) {
             // e.g. ^D
+            System.err.println("Error reading line");
             return null;
         }
     }

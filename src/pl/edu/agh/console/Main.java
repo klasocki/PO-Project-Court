@@ -1,5 +1,7 @@
 package pl.edu.agh.console;
 
+import pl.edu.agh.commands.CommandList;
+
 import java.io.File;
 
 public class Main {
@@ -16,7 +18,7 @@ public class Main {
             return;
         }
 
-        var shell = new Shell();
+        var shell = new Shell(CommandList.getCommandList());
         shell.run();
         System.out.println("hello");
     }
