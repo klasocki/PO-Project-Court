@@ -1,14 +1,13 @@
 package pl.edu.agh.dataExtraction;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.jsoup.select.Selector;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +23,7 @@ class FileListerTest {
     }
 
     @Test
-    void listFiles() throws IOException {
+    void listFilesTest() throws IOException {
         assertThrows(IllegalArgumentException.class, FileListerTest::wrongArgumentExecutable,
                 "No files in directory " + file + " end with: .txt");
         File[] files = {
@@ -45,18 +44,19 @@ class FileListerTest {
     }
 
     @Test
-    void foo() {
-        for(var s : "af asfoijf   ofisjj\nf".split("\\s+"))
-        System.out.println(s);
-        System.out.println("af asfoijf   ofisjj\nf".split("\\s+").length);
-        var f = Paths.get("/dev/null");
-        var s = new ArrayList<String>();
-        s.add("asfasa");
-        try {
-            Files.write(f, s, Charset.forName("utf-8"));
-        } catch (IOException e) {
-            System.out.println("problem");
-        }
+    void foo() throws IOException {
+        final String fieldNameQuery = "td.lista-label";
+        final String fieldValueQuery = "td.info-list-value";
 
+
+        var files = FileLister.listFiles("htmlData", ".html");
+        var file = files[0];
+        Document doc = Jsoup.parse(file, "utf-8");
+        Elements s = Selector.select(fieldNameQuery, doc);
+        var val = Selector.select(fieldValueQuery, doc);
+        var sentence = Selector.select("span.info-list-value-uzasadnienie", doc);
+
+        System.out.println(sentence.get(1).text());
     }
+
 }

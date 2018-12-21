@@ -1,13 +1,14 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.Judgement;
+
+import pl.edu.agh.model.Judgment;
 
 import java.util.Map;
 
 public class TextContent {
-    private Map<String, Judgement> judgements;
+    private Map<String, Judgment> judgements;
 
-    public TextContent(Map<String, Judgement> judgements) {
+    public TextContent(Map<String, Judgment> judgements) {
         this.judgements = judgements;
     }
 

@@ -1,6 +1,6 @@
 //TODO override toString in SpecialRoles
 
-package pl.edu.agh.model;
+package pl.edu.agh.model.JSON;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

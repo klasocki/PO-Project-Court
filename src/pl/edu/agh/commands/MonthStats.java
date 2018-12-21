@@ -1,14 +1,13 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.Judgement;
+import pl.edu.agh.model.Judgment;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class MonthStats {
-    private Map<String, Judgement> judgements;
+    private Map<String, Judgment> judgements;
 
-    public MonthStats(Map<String, Judgement> judgements) {
+    public MonthStats(Map<String, Judgment> judgements) {
         this.judgements = judgements;
     }
     public String getStats() {

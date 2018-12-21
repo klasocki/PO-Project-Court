@@ -1,16 +1,14 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.CourtType;
-import pl.edu.agh.model.Judge;
-import pl.edu.agh.model.Judgement;
+import pl.edu.agh.model.Judgment;
 
 import java.util.List;
 import java.util.Map;
 
 public class Rubrum {
-    private Map<String, Judgement> judgements;
+    private Map<String, Judgment> judgements;
 
-    public Rubrum(Map<String, Judgement> judgements) {
+    public Rubrum(Map<String, Judgment> judgements) {
         this.judgements = judgements;
     }
 

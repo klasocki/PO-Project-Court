@@ -1,19 +1,20 @@
 // TODO date format should be checked while instantiating
 
-package pl.edu.agh.model;
+package pl.edu.agh.model.JSON;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import pl.edu.agh.model.Judgment;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Judgement implements Serializable
+public class JudgmentJSON implements Serializable, Judgment
 {
 
     @SerializedName("id")
@@ -82,7 +83,7 @@ public class Judgement implements Serializable
      * No args constructor for use in serialization
      *
      */
-    public Judgement() {
+    public JudgmentJSON() {
     }
 
     /**
@@ -108,7 +109,7 @@ public class Judgement implements Serializable
      * @param judgmentResult
      * @param referencedRegulations
      */
-    public Judgement(int id, String courtType, List<CourtCase> courtCases, String judgmentType, List<Judge> judges, Source source, List<String> courtReporters, String decision, String summary, String textContent, List<String> legalBases, List<ReferencedRegulation> referencedRegulations, List<String> keywords, List<ReferencedCourtCase> referencedCourtCases, String receiptDate, String meansOfAppeal, String judgmentResult, List<String> lowerCourtJudgments, List<DissentingOpinion> dissentingOpinions, String judgmentDate) {
+    public JudgmentJSON(int id, String courtType, List<CourtCase> courtCases, String judgmentType, List<Judge> judges, Source source, List<String> courtReporters, String decision, String summary, String textContent, List<String> legalBases, List<ReferencedRegulation> referencedRegulations, List<String> keywords, List<ReferencedCourtCase> referencedCourtCases, String receiptDate, String meansOfAppeal, String judgmentResult, List<String> lowerCourtJudgments, List<DissentingOpinion> dissentingOpinions, String judgmentDate) {
         super();
         this.id = id;
         this.courtType = CourtType.valueOf(courtType);
@@ -144,8 +145,8 @@ public class Judgement implements Serializable
         this.id = id;
     }
 
-    public CourtType getCourtType() {
-        return courtType;
+    public String getCourtType() {
+        return courtType.toString();
     }
 
     public void setCourtType(String courtType) {
@@ -311,10 +312,10 @@ public class Judgement implements Serializable
         if (other == this) {
             return true;
         }
-        if (!(other instanceof Judgement)) {
+        if (!(other instanceof JudgmentJSON)) {
             return false;
         }
-        Judgement rhs = ((Judgement) other);
+        JudgmentJSON rhs = ((JudgmentJSON) other);
         return new EqualsBuilder().append(summary, rhs.summary).append(keywords, rhs.keywords).append(textContent, rhs.textContent).append(meansOfAppeal, rhs.meansOfAppeal).append(judges, rhs.judges).append(courtType, rhs.courtType).append(legalBases, rhs.legalBases).append(judgmentDate, rhs.judgmentDate).append(dissentingOpinions, rhs.dissentingOpinions).append(lowerCourtJudgments, rhs.lowerCourtJudgments).append(decision, rhs.decision).append(referencedCourtCases, rhs.referencedCourtCases).append(id, rhs.id).append(receiptDate, rhs.receiptDate).append(courtReporters, rhs.courtReporters).append(judgmentType, rhs.judgmentType).append(source, rhs.source).append(courtCases, rhs.courtCases).append(judgmentResult, rhs.judgmentResult).append(referencedRegulations, rhs.referencedRegulations).isEquals();
     }
 

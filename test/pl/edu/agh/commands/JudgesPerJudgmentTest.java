@@ -3,9 +3,8 @@ package pl.edu.agh.commands;
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.TestFileReader;
 import pl.edu.agh.dataExtraction.FileLister;
-import pl.edu.agh.dataExtraction.JudgmentReader;
+import pl.edu.agh.dataExtraction.JsonJudgmentReader;
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +20,7 @@ class JudgesPerJudgmentTest {
         assertEquals(expected, command.getStats());
 
 
-        var reader = new JudgmentReader();
+        var reader = new JsonJudgmentReader();
         judgments = reader.readAll(FileLister.listFiles("jsonData", ".json"));
         command = new JudgesPerJudgment(judgments);
         System.out.println(command.getStats());

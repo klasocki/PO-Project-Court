@@ -1,16 +1,14 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.Judgement;
 import pl.edu.agh.model.MapUtils;
+import pl.edu.agh.model.Judgment;
 
 import java.util.*;
 
-import static java.util.Collections.reverseOrder;
-
 public class TopTenJudges {
-    private Map<String, Judgement> judgements;
+    private Map<String, Judgment> judgements;
 
-    public TopTenJudges(Map<String, Judgement> judgements) {
+    public TopTenJudges(Map<String, Judgment> judgements) {
         this.judgements = judgements;
     }
 
@@ -23,7 +21,7 @@ public class TopTenJudges {
             }
         }
         return "Sędziowie z największą liczbą wydanych orzeczeń\n" +
-                mapUtils.getStringTopValues(judgesJudgementCount, 10, " - ");
+                mapUtils.topValuesToString(10, " - ", judgesJudgementCount);
     }
 
 }

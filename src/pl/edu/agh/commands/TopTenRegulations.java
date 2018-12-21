@@ -1,15 +1,15 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.Judgement;
 import pl.edu.agh.model.MapUtils;
+import pl.edu.agh.model.Judgment;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TopTenRegulations {
-    private Map<String, Judgement> judgements;
+    private Map<String, Judgment> judgements;
 
-    public TopTenRegulations(Map<String, Judgement> judgements) {
+    public TopTenRegulations(Map<String, Judgment> judgements) {
         this.judgements = judgements;
     }
 
@@ -23,6 +23,6 @@ public class TopTenRegulations {
         }
 
         return "Najczęściej przywoływane ustawy\n" +
-                mapUtils.getStringTopValues(regulationsJudgementCount, 10, " - ");
+                mapUtils.topValuesToString(10, " - ", regulationsJudgementCount);
     }
 }

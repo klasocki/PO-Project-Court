@@ -2,8 +2,8 @@ package pl.edu.agh.commands;
 
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.TestFileReader;
-import pl.edu.agh.model.CourtType;
-import pl.edu.agh.model.Judge;
+import pl.edu.agh.model.JSON.CourtType;
+import pl.edu.agh.model.JSON.Judge;
 
 import java.io.IOException;
 import java.util.ArrayList;

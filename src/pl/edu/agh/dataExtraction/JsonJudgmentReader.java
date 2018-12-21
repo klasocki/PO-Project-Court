@@ -3,7 +3,8 @@ package pl.edu.agh.dataExtraction;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import pl.edu.agh.model.Judgement;
+import pl.edu.agh.model.JSON.JudgmentJSON;
+import pl.edu.agh.model.Judgment;
 
 import java.io.File;
 import java.io.FileReader;
@@ -11,26 +12,26 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class JudgmentReader {
-    public Judgement readSingle(File file, int index) throws IOException, IndexOutOfBoundsException{
+public class JsonJudgmentReader {
+    public Judgment readSingle(File file, int index) throws IOException, IndexOutOfBoundsException{
         var gson = new Gson();
         var jsonArray = readJsonArray(file);
-        return gson.fromJson(jsonArray.get(index), Judgement.class);
+        return gson.fromJson(jsonArray.get(index), JudgmentJSON.class);
 }
 
-    public Map<String, Judgement> readAll(File file) throws IOException{
+    public Map<String, Judgment> readAll(File file) throws IOException{
         var gson = new Gson();
         var jsonArray = readJsonArray(file);
-        var result = new LinkedHashMap<String, Judgement>();
+        var result = new LinkedHashMap<String, Judgment>();
         for (var jsonElement : jsonArray) {
-            var judgement = gson.fromJson(jsonElement, Judgement.class);
-            result.put(judgement.getKey(), judgement);
+            var judgment = gson.fromJson(jsonElement, JudgmentJSON.class);
+            result.put(judgment.getKey(), judgment);
         }
         return result;
     }
 
-    public Map<String, Judgement> readAll(File[] files) throws IOException {
-        var result = new LinkedHashMap<String, Judgement>();
+    public Map<String, Judgment> readAll(File[] files) throws IOException {
+        var result = new LinkedHashMap<String, Judgment>();
         for (var file : files) {
             result.putAll(readAll(file));
         }

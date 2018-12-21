@@ -1,27 +1,23 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.Judgement;
 import pl.edu.agh.model.MapUtils;
+import pl.edu.agh.model.Judgment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class JudgesPerJudgment {
-    private Map<String, Judgement> judgements;
+    private Map<String, Judgment> judgments;
 
-    public JudgesPerJudgment(Map<String, Judgement> judgements) {
-        this.judgements = judgements;
+    public JudgesPerJudgment(Map<String, Judgment> judgments) {
+        this.judgments = judgments;
     }
 
     public String getStats() {
-        var judgementsNumberForJudgesNumber =  new HashMap<Integer, Integer>();
         var mapUtils = new MapUtils<Integer, Integer>(); //helper object
-        for (var judgment : judgements.values()) {
-                mapUtils.incrValue(judgementsNumberForJudgesNumber, judgment.getJudges().size());
-        }
+
         //Max value used to list "infinity" top values
         return "Liczba orzeczeń wydanych przez skład z określoną liczbą sędziów\n"
-        + mapUtils.getStringTopValues(judgementsNumberForJudgesNumber, Integer.MAX_VALUE, ": ");
+                + mapUtils.getStringTopValues(judgments, j -> j.getJudges().size(), Integer.MAX_VALUE, ": ");
     }
 }
