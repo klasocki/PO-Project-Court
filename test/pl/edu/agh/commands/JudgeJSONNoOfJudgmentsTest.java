@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JudgeNoOfJudgmentsTest {
+class JudgeJSONNoOfJudgmentsTest {
     @Test
     public void judgeJudgementsTest() throws IOException {
         var judgements = TestFileReader.read();

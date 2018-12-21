@@ -3,7 +3,7 @@ package pl.edu.agh.commands;
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.TestFileReader;
 import pl.edu.agh.model.JSON.CourtType;
-import pl.edu.agh.model.JSON.Judge;
+import pl.edu.agh.model.JSON.JudgeJSON;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ class RubrumTest {
                 "Data: " + judgements.get("U 3/86").getJudgmentDate().toString()
                 +"\nRodzaj sądu: " + CourtType.CONSTITUTIONAL_TRIBUNAL.toString()
                 +"\nSędziowie: " +
-                "\nAndrzej Kabat - " + Judge.SpecialRole.REPORTING_JUDGE.toString() +
-                "\nKazimierz Buchała - " + Judge.SpecialRole.PRESIDING_JUDGE.toString() +
+                "\nAndrzej Kabat - " + JudgeJSON.SpecialRole.REPORTING_JUDGE.toString() +
+                "\nKazimierz Buchała - " + JudgeJSON.SpecialRole.PRESIDING_JUDGE.toString() +
                 "\nStanisław Pawela - ";
         var rubrumCommand = new Rubrum(judgements);
         assertEquals(rubrum, rubrumCommand.getRubrum("U 3/86"));
@@ -30,6 +30,7 @@ class RubrumTest {
                 "Nie znaleziono orzeczenia o sygnaturze adfs");
         keys.add("asd");
         assertThrows(IllegalArgumentException.class, () -> rubrumCommand.getRubrum(keys),
-                "Nie znaleziono orzeczenia o sygnaturze asd");    }
+                "Nie znaleziono orzeczenia o sygnaturze asd");
+    }
 
 }

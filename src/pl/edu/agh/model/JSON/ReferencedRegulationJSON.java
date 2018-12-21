@@ -6,10 +6,11 @@ import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import pl.edu.agh.model.ReferencedRegulation;
 
 import java.io.Serializable;
 
-public class ReferencedRegulation implements Serializable
+public class ReferencedRegulationJSON implements Serializable, ReferencedRegulation
 {
 
     @SerializedName("journalTitle")
@@ -31,66 +32,29 @@ public class ReferencedRegulation implements Serializable
 
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
-    public ReferencedRegulation() {
-    }
-
-    /**
-     * 
-     * @param text
-     * @param journalNo
-     * @param journalEntry
-     * @param journalTitle
-     * @param journalYear
-     */
-    public ReferencedRegulation(String journalTitle, int journalNo, int journalYear, int journalEntry, String text) {
-        super();
-        this.journalTitle = journalTitle;
-        this.journalNo = journalNo;
-        this.journalYear = journalYear;
-        this.journalEntry = journalEntry;
-        this.text = text;
+    public ReferencedRegulationJSON() {
     }
 
     public String getJournalTitle() {
         return journalTitle;
     }
 
-    public void setJournalTitle(String journalTitle) {
-        this.journalTitle = journalTitle;
-    }
-
     public int getJournalNo() {
         return journalNo;
-    }
-
-    public void setJournalNo(int journalNo) {
-        this.journalNo = journalNo;
     }
 
     public int getJournalYear() {
         return journalYear;
     }
 
-    public void setJournalYear(int journalYear) {
-        this.journalYear = journalYear;
-    }
-
     public int getJournalEntry() {
         return journalEntry;
     }
 
-    public void setJournalEntry(int journalEntry) {
-        this.journalEntry = journalEntry;
-    }
-
     public String getText() {
         return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     @Override
@@ -108,10 +72,10 @@ public class ReferencedRegulation implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof ReferencedRegulation) == false) {
+        if (!(other instanceof ReferencedRegulationJSON)) {
             return false;
         }
-        ReferencedRegulation rhs = ((ReferencedRegulation) other);
+        var rhs = ((ReferencedRegulationJSON) other);
         return new EqualsBuilder().append(text, rhs.text).append(journalNo, rhs.journalNo).append(journalEntry, rhs.journalEntry).append(journalTitle, rhs.journalTitle).append(journalYear, rhs.journalYear).isEquals();
     }
 

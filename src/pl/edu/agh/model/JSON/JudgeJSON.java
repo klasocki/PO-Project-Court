@@ -7,14 +7,22 @@ import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import pl.edu.agh.model.Judge;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Judge implements Serializable
+
+public class JudgeJSON implements Serializable, Judge
 {
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public JudgeJSON() {
+    }
 
     @SerializedName("name")
     @Expose
@@ -27,48 +35,13 @@ public class Judge implements Serializable
     private List<SpecialRole> specialRoles = new ArrayList<>();
     private final static long serialVersionUID = 2321313045761325177L;
 
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public Judge() {
-    }
-
-    /**
-     * 
-     * @param specialRoles
-     * @param name
-     * @param function
-     */
-    public Judge(String name, Object function, List<String> specialRoles) {
-        super();
-        this.name = name;
-        this.function = function;
-        this.specialRoles = specialRoles.stream().map(SpecialRole::valueOf).collect(Collectors.toList());
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Object getFunction() {
-        return function;
-    }
-
-    public void setFunction(Object function) {
-        this.function = function;
-    }
-
+    @Override
     public List<SpecialRole> getSpecialRoles() {
-        return specialRoles;
-    }
-
-    public void setSpecialRoles(List<String> specialRoles) {
-        this.specialRoles = specialRoles.stream().map(SpecialRole::valueOf).collect(Collectors.toList());
+        return Collections.unmodifiableList(specialRoles);
     }
 
     @Override
@@ -81,15 +54,16 @@ public class Judge implements Serializable
         return new HashCodeBuilder().append(specialRoles).append(name).append(function).toHashCode();
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof Judge)) {
+        if (!(other instanceof JudgeJSON)) {
             return false;
         }
-        Judge rhs = ((Judge) other);
+        JudgeJSON rhs = ((JudgeJSON) other);
         return new EqualsBuilder().append(specialRoles, rhs.specialRoles).append(name, rhs.name).append(function, rhs.function).isEquals();
     }
 
