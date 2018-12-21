@@ -75,6 +75,19 @@ public class JudgeJSON implements Serializable, Judge
 
             REASONS_FOR_JUDGMENT_AUTHOR // autor uzasadnienia
 
+            ;
+
+            public String toString() {
+                switch (this) {
+                    case PRESIDING_JUDGE:
+                        return "Przewodniczacy składu sędziowskiego";
+                    case REPORTING_JUDGE:
+                        return "Sędzia sprawozdawca";
+                    case REASONS_FOR_JUDGMENT_AUTHOR:
+                        return "Autor uzasadnienia";
+                }
+                return "";
+            }
         }
 
 
