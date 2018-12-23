@@ -10,10 +10,12 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JudgmentHTML implements Judgment {
     @Selector(
             value = "TITLE",
+            //regex matching everything before " -"
             regex = "(.+?(?=\\s-))"
     )
     private String signature;
@@ -21,6 +23,7 @@ public class JudgmentHTML implements Judgment {
     @Format(value = "yyyy-MM-dd")
     @Selector(
             value = "tr.niezaznaczona",
+            //date regex
             regex = "(\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))"
     )
     private Date date;
@@ -29,6 +32,11 @@ public class JudgmentHTML implements Judgment {
             value = "span.info-list-value-uzasadnienie"
     )
     private List<String> textContent;
+
+    @Selector("span.nakt")
+    private List<String> regulations;
+    /*@Selector()
+    private String courtType;*/
 
     @Override
     public String getKey() {
@@ -47,16 +55,15 @@ public class JudgmentHTML implements Judgment {
 
     @Override
     public String getTextContent() {
-        if (textContent.size() == 2) {
-            return textContent.get(1);
-        }
         // niektore orzeczenia nie maja uzasadnienia, tylko sentencje!!
-        return textContent.get(0);
+        // A niektóre i tezy i sentencje, ale uzasadnienie jest zawsze na koncu
+        return textContent.get(textContent.size() - 1);
     }
 
     @Override
     public List<ReferencedRegulation> getReferencedRegulations() {
-        return null;
+        return regulations.stream().map(ReferencedRegulationHTML::stringToRegulation).
+                collect(Collectors.toList());
     }
 
     @Override

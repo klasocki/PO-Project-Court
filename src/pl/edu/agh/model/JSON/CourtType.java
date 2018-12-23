@@ -16,11 +16,11 @@ public enum CourtType {
     public String toString() {
         switch (this) {
             case COMMON:
-                return "Sąd powszechny";
+                return "sąd powszechny";
             case SUPREME:
                 return "Sąd Najwyższy";
             case ADMINISTRATIVE:
-                return "Sąd Administracyjny";
+                return "Naczelny Sąd Administracyjny";
             case CONSTITUTIONAL_TRIBUNAL:
                 return "Trybunał Konstytucyjny";
             case NATIONAL_APPEAL_CHAMBER:

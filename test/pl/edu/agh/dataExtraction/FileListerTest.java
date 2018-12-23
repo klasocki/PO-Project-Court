@@ -1,6 +1,9 @@
 package pl.edu.agh.dataExtraction;
 
-import pl.droidsonroids.jspoon.HtmlAdapter;
+import fr.whimtrip.ext.jwhthtmltopojo.HtmlToPojoEngine;
+import fr.whimtrip.ext.jwhthtmltopojo.adapter.*;
+import fr.whimtrip.ext.jwhthtmltopojo.annotation.ReplaceWith;
+import fr.whimtrip.ext.jwhthtmltopojo.intrf.HtmlAdapter;
 import pl.droidsonroids.jspoon.Jspoon;
 import pl.droidsonroids.jspoon.annotation.*;
 import org.jsoup.Jsoup;
@@ -29,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FileListerTest {
 
-    private static final String file ="jsonData";
+    private static final String file = "jsonData";
 
     private static void wrongArgumentExecutable() throws IOException {
         FileLister.listFiles(file, ".txt");
@@ -71,36 +74,39 @@ class FileListerTest {
         System.out.println(sentence.get(1).text());
 
         System.out.println("Ewa Markiewicz /sprawozdawca/".split("/")[1]);
-        Jspoon jspoon = Jspoon.create();
-        HtmlAdapter<HasTitle> adapter = jspoon.adapter(HasTitle.class);
-        var string  = new String(Files.readAllBytes(Paths.get("htmlData/10/20/B10EFA642A.html")), StandardCharsets.UTF_8);
+
+        HtmlToPojoEngine htmlToPojoEngine = HtmlToPojoEngine.create();
+
+        HtmlAdapter<HasTitle> adapter = htmlToPojoEngine.adapter(HasTitle.class);
+        var string = new String(Files.readAllBytes(Paths.get("htmlData/10/20/B10EFA642A.html")), StandardCharsets.UTF_8);
         var z = adapter.fromHtml(string);
-        System.out.println(z.title);
-        System.out.println(z.getDate());
-        System.out.println(z.textContent.get(1));
-        System.out.println();
+        for (var t : z.regulations) {
+            System.out.println(t);
+        }
+        System.out.println(z.tags.get(3).value.split(" ").length);
     }
 }
+
 class HasTitle {
-    @pl.droidsonroids.jspoon.annotation.Selector(
-            value = "span.info-list-value-uzasadnienie"
-//            ,regex = "(?<=(?i)(Uzasadnienie )).+"
-    )
-    List<String> textContent;
+    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("tr.niezaznaczona")
+    @ReplaceWith(value = "/",
+            with = "**********")
+    List<Niezaznaczona> tags;
 
-    @pl.droidsonroids.jspoon.annotation.Selector(
-            value = "TITLE",
-            regex = "(.+?(?=\\s-))"
-    )
-    String title;
-    @pl.droidsonroids.jspoon.annotation.Selector(
-            value = "tr.niezaznaczona",
-            regex = "(\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))"
-    )
-    @Format("yyyy-MM-dd")
-    Date date;
+    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("span.nakt")
+    List<String> regulations;
+}
 
-    public LocalDate getDate() {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+class Niezaznaczona {
+    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-label")
+    String label;
+    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-value")
+    String value;
+    @Override
+    public String toString() {
+        return "Niezaznaczona{" +
+                "label='" + label + '\'' +
+                ", value='" + value + '\'' +
+                '}';
     }
 }
