@@ -1,16 +1,22 @@
 package pl.edu.agh.commands;
 
+import pl.edu.agh.console.FileUtils;
 import pl.edu.agh.model.MapUtils;
 import pl.edu.agh.model.Judgment;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TopTenRegulations {
+public class TopTenRegulations implements Command {
+    private String [] args;
     private Map<String, Judgment> judgements;
+    private String outputFilePath;
 
-    public TopTenRegulations(Map<String, Judgment> judgements) {
+    public TopTenRegulations(String[] args, Map<String, Judgment> judgements, String outputFilePath) {
+        this.args = args;
         this.judgements = judgements;
+        this.outputFilePath = outputFilePath;
     }
 
     public String getTopTen() {
@@ -24,5 +30,20 @@ public class TopTenRegulations {
 
         return "Najczęściej przywoływane ustawy\n" +
                 mapUtils.topValuesToString(10, " - ", regulationsJudgementCount);
+    }
+
+    @Override
+    public void execute() {
+        if (args.length != 0) {
+            System.out.println(CommandList.expectsNoArguments());
+        } else {
+            var result = getTopTen();
+            try {
+                FileUtils.writeToFile(outputFilePath,"regulations\n" + result);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(result);
+        }
     }
 }

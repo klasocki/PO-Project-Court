@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class MonthStatsTest {
     @Test
     public void getStatsTest() throws IOException {
-        var judgements = TestFileReader.read();
-        var command = new MonthStats(judgements);
+        var judgments = TestFileReader.read();
+        var command = new MonthStats(new String[]{} ,judgments, "");
         var expected = "Liczba orzeczeń w poszczególnych miesiacach (z uwzględnieniem wszystkich lat) \n" +
                 "1: 0\n" +
                 "2: 0\n" +

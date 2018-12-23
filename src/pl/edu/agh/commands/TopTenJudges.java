@@ -1,15 +1,22 @@
 package pl.edu.agh.commands;
 
+import pl.edu.agh.console.FileUtils;
 import pl.edu.agh.model.MapUtils;
 import pl.edu.agh.model.Judgment;
 
+import java.io.IOException;
 import java.util.*;
 
-public class TopTenJudges {
-    private Map<String, Judgment> judgements;
+public class TopTenJudges implements Command {
 
-    public TopTenJudges(Map<String, Judgment> judgements) {
+    private String [] args;
+    private Map<String, Judgment> judgements;
+    private String outputFilePath;
+
+    public TopTenJudges(String[] args, Map<String, Judgment> judgements, String outputFilePath) {
+        this.args = args;
         this.judgements = judgements;
+        this.outputFilePath = outputFilePath;
     }
 
     public String getTopTen() {
@@ -22,6 +29,21 @@ public class TopTenJudges {
         }
         return "Sędziowie z największą liczbą wydanych orzeczeń\n" +
                 mapUtils.topValuesToString(10, " - ", judgesJudgementCount);
+    }
+
+    @Override
+    public void execute() {
+        if (args.length != 0) {
+            System.out.println(CommandList.expectsNoArguments());
+        } else {
+            var result = getTopTen();
+            try {
+                FileUtils.writeToFile(outputFilePath, "judges\n" + result);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(result);
+        }
     }
 
 }

@@ -3,6 +3,9 @@ package pl.edu.agh.console;
 import pl.edu.agh.commands.CommandList;
 
 import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+
 
 public class Main {
 
@@ -25,11 +28,18 @@ public class Main {
             return;
         }
         String outputFile = (3 == args.length) ? args[2] : DEV_NULL_PATH;
+        try {
+            FileUtils.writeToFile(outputFile, "Sesja programu orzeczenia " + LocalDate.now());
+        } catch (IOException e) {
+            System.out.println("Problem z zapisem do pliku " + outputFile +
+                    ", upewnij się że plik nie jest folderem i że masz do niego prawa zapisu");
+        }
 
-
-        var shell = new Shell(CommandList.getCommandList());
+/*
+        var commandList = new CommandList(judgments, outputFile)
+        var shell = new Shell(commandList);
         shell.run();
+*/
     }
-
 
 }

@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class JudgeJSONNoOfJudgmentsTest {
     @Test
     public void judgeJudgementsTest() throws IOException {
-        var judgements = TestFileReader.read();
-        JudgeNoOfJudgments jnoCommand = new JudgeNoOfJudgments(judgements);
+        var judgments = TestFileReader.read();
+        JudgeNoOfJudgments jnoCommand = new JudgeNoOfJudgments(new String[]{} ,judgments, "");
         assertEquals(1, jnoCommand.getNumber("Kazimierz Buchała"));
         assertEquals(0, jnoCommand.getNumber("faopijfef09"));
     }

@@ -14,7 +14,7 @@ class JudgesPerJudgmentTest {
     @Test
     void getStats() throws IOException {
         var judgments = TestFileReader.read();
-        var command = new JudgesPerJudgment(judgments);
+        var command = new JudgesPerJudgment(new String[]{} ,judgments, "");
         var expected = "Liczba orzeczeń wydanych przez skład z określoną liczbą sędziów\n" +
                 "3: 1\n";
         assertEquals(expected, command.getStats());
@@ -22,7 +22,7 @@ class JudgesPerJudgmentTest {
 
         var reader = new JsonJudgmentReader();
         judgments = reader.readAll(FileLister.listFiles("jsonData", ".json"));
-        command = new JudgesPerJudgment(judgments);
+        command = new JudgesPerJudgment(new String[]{} ,judgments, "");
         System.out.println(command.getStats());
     }
 }

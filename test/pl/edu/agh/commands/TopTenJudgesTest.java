@@ -12,7 +12,7 @@ class TopTenJudgesTest {
     @Test
     void getTopTen() throws IOException {
         var judgment = TestFileReader.read();
-        var command = new TopTenJudges(judgment);
+        var command = new TopTenJudges(new String[]{} , judgment, "");
         var expected = "Sędziowie z największą liczbą wydanych orzeczeń\n" +
                 "Andrzej Kabat - 1\n" +
                 "Kazimierz Buchała - 1\n" +

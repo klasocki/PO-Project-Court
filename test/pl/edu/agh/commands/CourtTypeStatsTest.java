@@ -13,7 +13,7 @@ class CourtTypeStatsTest {
         var judgment = TestFileReader.read();
         var expected = "Liczba orzeczeń danego typu sądu\n" +
                 "Trybunał Konstytucyjny: 1\n";
-        var command = new CourtTypeStats(judgment);
+        var command = new CourtTypeStats(new String[]{} ,judgment, "");
         assertEquals(expected, command.getStats());
     }
 

@@ -11,8 +11,8 @@ import pl.edu.agh.model.Judge;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class JudgeJSON implements Serializable, Judge
@@ -40,8 +40,8 @@ public class JudgeJSON implements Serializable, Judge
     }
 
     @Override
-    public List<SpecialRole> getSpecialRoles() {
-        return Collections.unmodifiableList(specialRoles);
+    public List<String> getSpecialRoles() {
+        return specialRoles.stream().map(SpecialRole::toString).collect(Collectors.toUnmodifiableList());
     }
 
     @Override

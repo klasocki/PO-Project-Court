@@ -12,7 +12,7 @@ class TopTenRegulationsTest {
     void getTopTen() throws IOException {
         var reader = new JsonJudgmentReader();
         var judgments = reader.readAll(FileLister.listFiles("jsonData", ".json"));
-        var command = new TopTenRegulations(judgments);
+        var command = new TopTenRegulations(new String[]{} ,judgments, "");
         System.out.println(command.getTopTen());
     }
 
