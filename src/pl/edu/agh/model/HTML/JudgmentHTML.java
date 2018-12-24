@@ -18,14 +18,14 @@ public class JudgmentHTML implements Judgment {
     @Selector(
             value = "TITLE",
             //regex matching everything before " -"
-            regex = "(.+?(?=\\s-))"
+            regex = "(.+?(?=\\s+-))"
     )
     private String signature;
 
     @Format(value = "yyyy-MM-dd")
     @Selector(
             value = "tr.niezaznaczona",
-            //date regex
+            //date regex (judgment date is always the first date in the table)
             regex = "(\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))"
     )
     private Date date;
@@ -35,8 +35,9 @@ public class JudgmentHTML implements Judgment {
 
     @Selector("span.nakt")
     private List<String> regulations;
-    /*@Selector()
-    private String courtType;*/
+
+    @Selector("tr.niezaznaczona")
+    private List<Niezaznaczona> tableRows;
 
     private List<Judge> judges = new ArrayList<>();
 
@@ -52,6 +53,12 @@ public class JudgmentHTML implements Judgment {
 
     @Override
     public String getCourtType() {
+        for (var tr : tableRows) {
+            if (tr.label.matches("(?i)(s[aą]d)q")) {
+                //regex to get e.g. only "sąd wojewódzki" from "sąd wojewódzki w Krakowie"
+                return tr.value.trim().split("\\s+w\\s+\\p{Lu}\\p{Ll}+")[0];
+            }
+        }
         return null;
     }
 
@@ -78,6 +85,13 @@ public class JudgmentHTML implements Judgment {
             throw new UnsupportedOperationException("You can only set judges once, through the builder class!");
         } else
             this.judges = judges;
+    }
+
+    private class Niezaznaczona {
+        @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-label")
+        String label;
+        @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-value")
+        String value;
     }
 }
 

@@ -1,5 +1,3 @@
-// TODO date format should be checked while instantiating
-
 package pl.edu.agh.model.JSON;
 
 import com.google.gson.annotations.Expose;
