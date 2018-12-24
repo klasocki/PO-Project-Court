@@ -33,7 +33,7 @@ public class Main {
         }
         String outputFile = (3 == args.length) ? args[2] : DEV_NULL_PATH;
             try {
-            FileUtils.writeToFile(outputFile, "Sesja programu orzeczenia " + LocalDate.now());
+            FileUtils.writeToFile(outputFile, "Sesja programu orzeczenia " + LocalDate.now() + "\n");
         } catch (IOException e) {
             System.out.println("Problem z zapisem do pliku " + outputFile +
                     ", upewnij się że plik nie jest folderem i że masz do niego prawa zapisu");

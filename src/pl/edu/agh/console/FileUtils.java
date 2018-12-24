@@ -1,14 +1,13 @@
 package pl.edu.agh.console;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class FileUtils {
-
     public static void writeToFile(String filePath, String content) throws IOException {
-        var fw = new FileWriter(filePath);
-        fw.write(content);
-        fw.close();
+        Files.write(Paths.get(filePath), content.getBytes(), StandardOpenOption.APPEND);
     }
 
 }
