@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jline.reader.*;
 import org.jline.reader.impl.completer.*;
 import pl.edu.agh.commands.Command;
@@ -25,9 +26,9 @@ class Shell {
 
         String line;
         while ((line = readLine(reader, promptMessage)) != null) {
-            var words = line.split("\\s+");
-            if (words.length == 0) System.out.println("Podaj nazwę komenty, wciśnij tab lub help aby uzyskać pomoc");
-            String command = words[0];
+            var words = line.split("\"");
+            if (words.length == 0) System.out.println("Podaj nazwę komenty, wciśnij tab lub wpisz help aby uzyskać pomoc");
+            String command = words[0].trim();
             var args = getCommandArguments(words);
             switch (words[0]) {
                 case "help":
@@ -43,9 +44,12 @@ class Shell {
 
     }
 
-    private String[] getCommandArguments(String[] words) {
+    String[] getCommandArguments(String[] words) {
         if (words.length == 1) words = new String[]{};
-        else words = Arrays.copyOfRange(words, 1, words.length);
+        else words = Arrays.stream(Arrays.copyOfRange(words, 1, words.length))
+                .filter(StringUtils::isNotBlank)
+                .map(String::trim).map(StringUtils::normalizeSpace)
+                .toArray(String[]::new);
         return words;
     }
 
@@ -67,6 +71,8 @@ class Shell {
     }
 
     private void printHelp() {
+        System.out.println("Komendy wymagające argumentów przyjmują je jako " +
+                "ciagi znaków zawarte w cudzysłowach, oddzielone białym znakiem");
         System.out.println("help		- Pokaż pomoc");
         System.out.println("exit        - Wyjdź z aplikacji");
         System.out.println(commandList.helpMessage());

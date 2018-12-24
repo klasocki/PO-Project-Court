@@ -27,7 +27,7 @@ public class CommandList {
     }
 
     public String helpMessage() {
-        return "rubrum       - zwraca metrykę jednego lub więcej orzeczeń o sygnaturach podanych jako parametr\n" +
+        return  "rubrum      - zwraca metrykę jednego lub więcej orzeczeń o sygnaturach podanych jako parametr\n" +
                 "content     - zwraca uzasadnienie orzeczenia o podanej sygnaturze\n" +
                 "judge       - zwraca liczbę orzeczeń dla podanego imienia i nazwiska sędziego\n" +
                 "judges      - zwraca 10 sędziów o największej liczbie orzeczeń\n" +
@@ -63,10 +63,10 @@ public class CommandList {
         return "Podano zbyt dużo argumentów, komenda nie wymaga żadnego";
     }
     public static String expectsOneOrMoreArguments() {
-        return "Nie podano, wymagany jeden lub więcej";
+        return "Nie podano argumentów, wymagany jeden lub więcej, zawarte pomiędzy znakami \"";
     }
     public static String expectsOneArgument() {
-        return "Podano złą liczbę argumentów, komenda wymaga dokładnie jednego";
+        return "Podano złą liczbę argumentów, komenda wymaga dokładnie jednego, zawartego pomiędzy znakami \"";
     }
 
 }

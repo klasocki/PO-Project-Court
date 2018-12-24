@@ -61,66 +61,13 @@ class FileListerTest {
 
     @Test
     void foo() throws IOException {
-        final String fieldNameQuery = "td.lista-label";
-        final String fieldValueQuery = "td.info-list-value";
-
-
-        var files = FileLister.listFiles("htmlData", ".html");
-        var file = files[0];
-        Document doc = Jsoup.parse(file, "utf-8");
-        Elements s = Selector.select(fieldNameQuery, doc);
-        var val = Selector.select(fieldValueQuery, doc);
-        var sentence = Selector.select("span.info-list-value-uzasadnienie", doc);
-        System.out.println(sentence.get(1).text());
-
-        System.out.println("Ewa Markiewicz /sprawozdawca/ /tentego/".split("/")[1]);
-
-        HtmlToPojoEngine htmlToPojoEngine = HtmlToPojoEngine.create();
-
-        HtmlAdapter<HasTitle> adapter = htmlToPojoEngine.adapter(HasTitle.class);
-        var string = new String(Files.readAllBytes(Paths.get("htmlData/10/20/B10EFA642A.html")), StandardCharsets.UTF_8);
-        var z = adapter.fromHtml(string);
-        for (var t : z.regulations) {
-            System.out.println(t);
+        var s = "polecenie \"argumenty\" \"argumenty to jest tooo\" \"oo tak\" ";
+        /*for (var v : s.split("\\s")) {
+            System.out.println(v);
+        }*/
+        for (var q : s.split("\"")) {
+            System.out.println(q);
         }
 
-        for (var el : doc.select("tr.niezaznaczona") ) {
-            if (el.select(fieldNameQuery).text().matches("\\s*(?i)(s(e|ę)dzi(a|(owie)))\\s*")) {
-                System.out.println(el.select(fieldValueQuery).html());
-                System.out.println(el.
-                        select("td.info-list-value").
-//                        text());
-                        toString().split("<td class=\"info-list-value\">")[1].split("</td>")[0]
-                .split("<br>").length
-                );
-                System.out.println("tu match jest");
-            }
-
-        }
-        System.out.println(" sąd ".matches("(?i)(s[aą]d)"));
-    }
-}
-
-class HasTitle {
-    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("tr.niezaznaczona")
-    @ReplaceWith(value = "/",
-            with = "**********")
-    List<Niezaznaczona> tags;
-
-    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("span.nakt")
-    List<String> regulations;
-}
-
-class Niezaznaczona {
-    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-label")
-    String label;
-    @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-value")
-    String value;
-    @Override
-    public String toString() {
-        return "Niezaznaczona{" +
-                "label='" + label + '\'' +
-                ", value='" + value + '\'' +
-                '}';
     }
 }
