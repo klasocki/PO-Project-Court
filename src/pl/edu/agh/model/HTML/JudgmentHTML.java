@@ -8,6 +8,8 @@ import pl.edu.agh.model.ReferencedRegulation;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,15 +30,15 @@ public class JudgmentHTML implements Judgment {
     )
     private Date date;
 
-    @Selector(
-            value = "span.info-list-value-uzasadnienie"
-    )
+    @Selector("span.info-list-value-uzasadnienie")
     private List<String> textContent;
 
     @Selector("span.nakt")
     private List<String> regulations;
     /*@Selector()
     private String courtType;*/
+
+    private List<Judge> judges = new ArrayList<>();
 
     @Override
     public String getKey() {
@@ -45,7 +47,7 @@ public class JudgmentHTML implements Judgment {
 
     @Override
     public List<Judge> getJudges() {
-        return null;
+        return Collections.unmodifiableList(judges);
     }
 
     @Override
@@ -69,6 +71,13 @@ public class JudgmentHTML implements Judgment {
     @Override
     public LocalDate getJudgmentDate() {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    void setJudges(List<Judge> judges) {
+        if (!judges.isEmpty()) {
+            throw new UnsupportedOperationException("You can only set judges once, through the builder class!");
+        } else
+            this.judges = judges;
     }
 }
 

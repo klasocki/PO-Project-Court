@@ -73,7 +73,7 @@ class FileListerTest {
         var sentence = Selector.select("span.info-list-value-uzasadnienie", doc);
         System.out.println(sentence.get(1).text());
 
-        System.out.println("Ewa Markiewicz /sprawozdawca/".split("/")[1]);
+        System.out.println("Ewa Markiewicz /sprawozdawca/ /tentego/".split("/")[1]);
 
         HtmlToPojoEngine htmlToPojoEngine = HtmlToPojoEngine.create();
 
@@ -83,7 +83,20 @@ class FileListerTest {
         for (var t : z.regulations) {
             System.out.println(t);
         }
-        System.out.println(z.tags.get(3).value.split(" ").length);
+
+        for (var el : doc.select("tr.niezaznaczona") ) {
+            if (el.select(fieldNameQuery).text().matches("\\s*(?i)(s(e|ę)dzi(a|(owie)))\\s*")) {
+                System.out.println(el.select(fieldValueQuery).html());
+                System.out.println(el.
+                        select("td.info-list-value").
+//                        text());
+                        toString().split("<td class=\"info-list-value\">")[1].split("</td>")[0]
+                .split("<br>").length
+                );
+                System.out.println("tu match jest");
+            }
+
+        }
     }
 }
 
