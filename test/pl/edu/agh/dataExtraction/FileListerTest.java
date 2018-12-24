@@ -97,7 +97,7 @@ class FileListerTest {
             }
 
         }
-        System.out.println("    sąd wojewódzki w Łódź  \n".trim().split("\\s+w\\s+\\p{Lu}\\p{Ll}+")[0]);
+        System.out.println(" sąd ".matches("(?i)(s[aą]d)"));
     }
 }
 

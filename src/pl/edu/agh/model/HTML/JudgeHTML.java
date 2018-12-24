@@ -11,14 +11,17 @@ public class JudgeHTML implements Judge {
     List<String> specialRoles = new ArrayList<>();
 
     public JudgeHTML(String text) {
-        this.name = text.split("/")[0];
-        var roles = text.split("/")[1].split("\\s");
-        this.specialRoles.addAll(Arrays.asList(roles));
+        var splittedText = text.split("/");
+        this.name = splittedText[0];
+        if (splittedText.length > 1) {
+            var roles = splittedText[1].split("\\s");
+            this.specialRoles.addAll(Arrays.asList(roles));
+        }
     }
 
     @Override
     public String getName() {
-        return name;
+        return name.trim();
     }
 
     @Override

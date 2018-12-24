@@ -12,12 +12,12 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JsonJudgmentReaderTest {
+public class JudgmentReaderJSONTest {
     private final File testFile = new File("test/pl/edu/agh/dataExtraction/testJudgement.json");
 
     @Test
     void readSingleTest() throws IOException {
-        var judgementReader = new JsonJudgmentReader();
+        var judgementReader = new JudgmentReaderJSON();
         var judgement = judgementReader.readSingle(testFile, 0);
         assertEquals(judgement.getTextContent(), "Orzeczenie\nz dnia 16 czerwca 1986 r.\n/U 3/86 r./\n\n\nTrybunał Konstytucyjny w składzie: \n\nPrzewodniczący: \tSędzia TK Kazimierz Buchała \n\nSędziowie TK: \tAndrzej Kabat (sprawozdawca) \nStanisław Pawela \n\nProtokolant: \tJerzy Adam Porowski \n\n\npo rozpatrzeniu w dniu 16 czerwca 1986 r. na rozprawie, z udziałem uczestników postępowania umocowanych przedstawicieli: Rady Ministrów, Ministra Handlu Wewnętrznego i Usług oraz Prokuratora Generalnego PRL, sprawy z wniosku Komitetu Wykonawczego Rady Krajowej Patriotycznego Ruchu Odrodzenia Narodowego o wydanie orzeczenia stwierdzającego niezgodność: \n\n1) przepisu § 2 ust. 2 rozporządzenia Rady Ministrów z dnia 28 października 1983 r. ...");
         assertNotEquals(new ArrayList<JudgeJSON>(), judgement.getJudges());
@@ -27,19 +27,19 @@ public class JsonJudgmentReaderTest {
     @Test
     void readExcTest() {
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            JsonJudgmentReader jsonJudgmentReader = new JsonJudgmentReader();
-            jsonJudgmentReader.readSingle(testFile, 1);
+            JudgmentReaderJSON judgmentReaderJSON = new JudgmentReaderJSON();
+            judgmentReaderJSON.readSingle(testFile, 1);
         });
         assertThrows(FileNotFoundException.class, () -> {
-            JsonJudgmentReader jsonJudgmentReader = new JsonJudgmentReader();
-            jsonJudgmentReader.readSingle(new File("filefilehey.json"), 0);
+            JudgmentReaderJSON judgmentReaderJSON = new JudgmentReaderJSON();
+            judgmentReaderJSON.readSingle(new File("filefilehey.json"), 0);
         });
     }
 
     @Test
     void readAllTest() throws IOException{
         File[] files = {testFile};
-        var judgementReader = new JsonJudgmentReader();
+        var judgementReader = new JudgmentReaderJSON();
         var judgement = judgementReader.readSingle(testFile, 0);
         Map<String, Judgment> judgementsAllFiles = judgementReader.readAll(files);
         Map<String, Judgment> judgementsOneFile = judgementReader.readAll(testFile);

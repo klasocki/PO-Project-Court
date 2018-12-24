@@ -1,6 +1,6 @@
 package pl.edu.agh;
 
-import pl.edu.agh.dataExtraction.JsonJudgmentReader;
+import pl.edu.agh.dataExtraction.JudgmentReaderJSON;
 import pl.edu.agh.model.Judgment;
 
 import java.io.File;
@@ -14,7 +14,7 @@ public class TestFileReader {
     }
 
     public static Map<String, Judgment> read(File testFile) throws IOException {
-        var reader = new JsonJudgmentReader();
+        var reader = new JudgmentReaderJSON();
         return reader.readAll(testFile);
     }
 

@@ -54,7 +54,7 @@ public class JudgmentHTML implements Judgment {
     @Override
     public String getCourtType() {
         for (var tr : tableRows) {
-            if (tr.label.matches("(?i)(s[aą]d)q")) {
+            if (tr.label.trim().matches("(?i)(s[aą]d)")) {
                 //regex to get e.g. only "sąd wojewódzki" from "sąd wojewódzki w Krakowie"
                 return tr.value.trim().split("\\s+w\\s+\\p{Lu}\\p{Ll}+")[0];
             }
@@ -81,17 +81,10 @@ public class JudgmentHTML implements Judgment {
     }
 
     void setJudges(List<Judge> judges) {
-        if (!judges.isEmpty()) {
+        if (!this.judges.isEmpty()) {
             throw new UnsupportedOperationException("You can only set judges once, through the builder class!");
         } else
             this.judges = judges;
     }
 
-    private class Niezaznaczona {
-        @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-label")
-        String label;
-        @fr.whimtrip.ext.jwhthtmltopojo.annotation.Selector("td.info-list-value")
-        String value;
-    }
 }
-

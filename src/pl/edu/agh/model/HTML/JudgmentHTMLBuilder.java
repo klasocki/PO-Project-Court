@@ -1,8 +1,8 @@
 package pl.edu.agh.model.HTML;
 
-import fr.whimtrip.ext.jwhthtmltopojo.HtmlToPojoEngine;
-import fr.whimtrip.ext.jwhthtmltopojo.intrf.HtmlAdapter;
 import org.jsoup.Jsoup;
+import pl.droidsonroids.jspoon.HtmlAdapter;
+import pl.droidsonroids.jspoon.Jspoon;
 import pl.edu.agh.model.Judge;
 import pl.edu.agh.model.Judgment;
 
@@ -11,8 +11,8 @@ import java.util.List;
 
 public class JudgmentHTMLBuilder {
 
-    private final HtmlToPojoEngine htmlToPojoEngine = HtmlToPojoEngine.create();
-    private final HtmlAdapter<JudgmentHTML> adapter = htmlToPojoEngine.adapter(JudgmentHTML.class);
+    private final Jspoon jspoon = Jspoon.create();
+    private final HtmlAdapter<JudgmentHTML> adapter = jspoon.adapter(JudgmentHTML.class);
 
     public Judgment buildJudgment(String htmlContent) {
         var judgment = adapter.fromHtml(htmlContent);
