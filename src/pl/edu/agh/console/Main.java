@@ -1,6 +1,10 @@
 package pl.edu.agh.console;
 
 import pl.edu.agh.commands.CommandList;
+import pl.edu.agh.dataExtraction.FileLister;
+import pl.edu.agh.dataExtraction.JudgmentReader;
+import pl.edu.agh.dataExtraction.JudgmentReaderHTML;
+import pl.edu.agh.dataExtraction.JudgmentReaderJSON;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +19,7 @@ public class Main {
 
         if (args.length < 2 || 3 < args.length) {
             System.out.println("Wymagane co najmniej 2 i conajwyżej 3 atrybuty," +
-                    " podaj ścieżkę do folderu z orzeczeniami w formacie json," +
+                    " podaj ścieżkę do folderu z orzeczeniami w formacie json, " +
                     "ścieżkę do folderu z orzeczeniami w formacie html" +
                     " i opcjonalnie ścieżkę do pliku txt w którym mają być zapisywane wyniki komend");
             return;
@@ -28,18 +32,32 @@ public class Main {
             return;
         }
         String outputFile = (3 == args.length) ? args[2] : DEV_NULL_PATH;
-        try {
+            try {
             FileUtils.writeToFile(outputFile, "Sesja programu orzeczenia " + LocalDate.now());
         } catch (IOException e) {
             System.out.println("Problem z zapisem do pliku " + outputFile +
                     ", upewnij się że plik nie jest folderem i że masz do niego prawa zapisu");
         }
+        File[] filesJSON;
+        File[] filesHTML;
+        try {
+            System.out.println("Wczytywanie danych...");
+            filesJSON = FileLister.listFiles(jsonFolder, ".json");
+            filesHTML = FileLister.listFiles(htmlFolder, ".html");
+            var readerJSON = new JudgmentReaderJSON();
+            var readerHTML = new JudgmentReaderHTML();
+            var judgments = readerJSON.readAll(filesJSON);
+            judgments.putAll(readerHTML.readAll(filesHTML));
 
-/*
-        var commandList = new CommandList(judgments, outputFile)
-        var shell = new Shell(commandList);
-        shell.run();
-*/
+            var commandList = new CommandList(judgments, outputFile);
+            var shell = new Shell(commandList);
+            shell.run();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -56,7 +56,7 @@ public class JudgmentHTML implements Judgment {
         for (var tr : tableRows) {
             if (tr.label.trim().matches("(?i)(s[aą]d)")) {
                 //regex to get e.g. only "sąd wojewódzki" from "sąd wojewódzki w Krakowie"
-                return tr.value.trim().split("\\s+w\\s+\\p{Lu}\\p{Ll}+")[0];
+                return tr.value.trim().split("\\s+we?\\s+\\p{Lu}\\p{Ll}+")[0];
             }
         }
         return null;
@@ -71,6 +71,7 @@ public class JudgmentHTML implements Judgment {
 
     @Override
     public List<ReferencedRegulation> getReferencedRegulations() {
+        if(regulations == null || regulations.isEmpty()) return new ArrayList<>();
         return regulations.stream().map(ReferencedRegulationHTML::stringToRegulation).
                 collect(Collectors.toList());
     }
