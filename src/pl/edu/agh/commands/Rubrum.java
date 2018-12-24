@@ -44,8 +44,8 @@ public class Rubrum implements Command {
         var builder = new StringBuilder();
         var prefix = "";
         for (var key : keys) {
-            builder.append(getRubrum(key)).append(prefix);
-            prefix = "\n***************";
+            builder.append(prefix).append(getRubrum(key));
+            prefix = "\n***************\n";
         }
         return builder.toString();
     }
