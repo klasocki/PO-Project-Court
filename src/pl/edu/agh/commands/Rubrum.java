@@ -51,7 +51,7 @@ public class Rubrum implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String line) {
         if (args.length < 1) {
             System.out.println(CommandList.expectsOneOrMoreArguments());
         } else {
@@ -62,12 +62,12 @@ public class Rubrum implements Command {
                 System.out.println(e.getMessage());
                 return;
             }
-        try {
-            FileUtils.writeToFile(outputFilePath, "rubrum\n" + result);
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                FileUtils.writeToFile(outputFilePath, "\n" + line + "\n" + result);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(result);
         }
-        System.out.println(result);
     }
-}
 }

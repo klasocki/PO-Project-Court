@@ -8,6 +8,9 @@ import pl.edu.agh.dataExtraction.JudgmentReaderJSON;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 
 
@@ -33,10 +36,12 @@ public class Main {
         }
         String outputFile = (3 == args.length) ? args[2] : DEV_NULL_PATH;
             try {
-            FileUtils.writeToFile(outputFile, "Sesja programu orzeczenia " + LocalDate.now() + "\n");
+                var initLog = "Sesja programu orzeczenia " + LocalDate.now() + "\n";
+                Files.write(Paths.get(outputFile), initLog.getBytes());
         } catch (IOException e) {
             System.out.println("Problem z zapisem do pliku " + outputFile +
                     ", upewnij się że plik nie jest folderem i że masz do niego prawa zapisu");
+            return;
         }
         File[] filesJSON;
         File[] filesHTML;

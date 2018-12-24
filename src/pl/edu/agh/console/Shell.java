@@ -38,7 +38,7 @@ class Shell {
                     System.out.println("Wychodzę z aplikacji...");
                     return;
                 default:
-                    parseAndExecute(command, args);
+                    parseAndExecute(command, args, line);
             }
         }
 
@@ -53,9 +53,9 @@ class Shell {
         return words;
     }
 
-    private void parseAndExecute(String command, String[] args) {
+    private void parseAndExecute(String command, String[] args, String line) {
         var com = commandList.parseCommand(command, args);
-        com.execute();
+        com.execute(line);
     }
 
     private LineReader prepareLineReader() {

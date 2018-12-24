@@ -28,7 +28,7 @@ public class TextContent implements Command {
 
 
     @Override
-    public void execute() {
+    public void execute(String line) {
         if (args.length != 1) {
             System.out.println(CommandList.expectsOneArgument());
         } else {
@@ -40,7 +40,7 @@ public class TextContent implements Command {
                 return;
             }
             try {
-                FileUtils.writeToFile(outputFilePath, "content\n" + result);
+                FileUtils.writeToFile(outputFilePath, "\n" + line + "\n" + result);
             } catch (IOException e) {
                 e.printStackTrace();
             }

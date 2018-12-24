@@ -30,13 +30,13 @@ public class JudgesPerJudgment implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String line) {
         if (args.length != 0) {
             System.out.println(CommandList.expectsNoArguments());
         } else {
             var result = getStats();
             try {
-                FileUtils.writeToFile(outputFilePath, "jury\n" + result);
+                FileUtils.writeToFile(outputFilePath, "\n" + line + "\n" + result);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -33,13 +33,13 @@ public class TopTenRegulations implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String line) {
         if (args.length != 0) {
             System.out.println(CommandList.expectsNoArguments());
         } else {
             var result = getTopTen();
             try {
-                FileUtils.writeToFile(outputFilePath,"regulations\n" + result);
+                FileUtils.writeToFile(outputFilePath, "\n" + line + "\n" + result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
