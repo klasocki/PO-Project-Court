@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class JsonJudgmentReader {
+public class JudgmentReaderJSON implements JudgmentReader{
     public Judgment readSingle(File file, int index) throws IOException, IndexOutOfBoundsException{
         var gson = new Gson();
         var jsonArray = readJsonArray(file);
