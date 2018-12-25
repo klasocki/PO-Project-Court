@@ -9,13 +9,11 @@ import org.jline.reader.*;
 import org.jline.reader.impl.completer.*;
 import pl.edu.agh.commands.CommandList;
 
-
-
 class Shell {
     private CommandList commandList;
-    private String promptMessage = "orzeczenia";
+    private final String promptMessage = "orzeczenia";
 
-    public Shell(CommandList commandList) {
+    Shell(CommandList commandList) {
         this.commandList = commandList;
     }
 
@@ -73,11 +71,11 @@ class Shell {
     }
 
     private void printHelp() {
-        System.out.println("Komendy wymagające argumentów przyjmują je jako " +
+        System.out.println("\nKomendy wymagające argumentów przyjmują je jako " +
                 "ciagi znaków zawarte w cudzysłowach, oddzielone białym znakiem");
         System.out.println("help        - Pokaż pomoc");
         System.out.println("exit        - Wyjdź z aplikacji");
-        System.out.println(commandList.helpMessage());
+        System.out.println(commandList.helpMessage() + "\n");
     }
 
     private String readLine(LineReader reader, String promtMessage) {

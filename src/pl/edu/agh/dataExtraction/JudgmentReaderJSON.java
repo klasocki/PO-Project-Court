@@ -13,13 +13,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class JudgmentReaderJSON implements JudgmentReader{
-    public Judgment readSingle(File file, int index) throws IOException, IndexOutOfBoundsException{
+    Judgment readSingle(File file, int index)
+            throws IOException, IndexOutOfBoundsException, IllegalArgumentException{
         var gson = new Gson();
         var jsonArray = readJsonArray(file);
         return gson.fromJson(jsonArray.get(index), JudgmentJSON.class);
 }
 
-    public Map<String, Judgment> readAll(File file) throws IOException{
+    public Map<String, Judgment> readAll(File file) throws IOException, IllegalArgumentException{
         var gson = new Gson();
         var jsonArray = readJsonArray(file);
         var result = new LinkedHashMap<String, Judgment>();
@@ -30,7 +31,7 @@ public class JudgmentReaderJSON implements JudgmentReader{
         return result;
     }
 
-    public Map<String, Judgment> readAll(File[] files) throws IOException {
+    public Map<String, Judgment> readAll(File[] files) throws IOException, IllegalArgumentException {
         var result = new LinkedHashMap<String, Judgment>();
         for (var file : files) {
             result.putAll(readAll(file));
@@ -38,11 +39,17 @@ public class JudgmentReaderJSON implements JudgmentReader{
         return result;
     }
 
-    private JsonArray readJsonArray(File file) throws IOException {
+    private JsonArray readJsonArray(File file) throws IOException, IllegalArgumentException {
         try (FileReader reader = new FileReader(file)) {
             var gson = new Gson();
             var jsonObject = gson.fromJson(reader, JsonObject.class);
-            return gson.fromJson(jsonObject.getAsJsonArray("items"), JsonArray.class);
+            if (jsonObject == null || jsonObject.isJsonNull())
+                throw new IllegalArgumentException("W pliku " + file.getPath() + " nie ma orzeczeń w formacie json");
+            JsonArray jsonArray = gson.fromJson(jsonObject.getAsJsonArray("items"), JsonArray.class);
+            if (jsonArray == null || jsonArray.isJsonNull() || jsonArray.size() == 0) {
+                throw new IllegalArgumentException("W pliku " + file.getPath() + " nie ma orzeczeń w formacie json");
+            }
+            return jsonArray;
         }
     }
 }

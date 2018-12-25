@@ -26,14 +26,18 @@ public class JudgmentReaderJSONTest {
 
     @Test
     void readExcTest() {
+        JudgmentReaderJSON judgmentReaderJSON = new JudgmentReaderJSON();
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            JudgmentReaderJSON judgmentReaderJSON = new JudgmentReaderJSON();
             judgmentReaderJSON.readSingle(testFile, 1);
         });
         assertThrows(FileNotFoundException.class, () -> {
-            JudgmentReaderJSON judgmentReaderJSON = new JudgmentReaderJSON();
             judgmentReaderJSON.readSingle(new File("filefilehey.json"), 0);
         });
+
+        assertThrows(IllegalArgumentException.class,
+                () -> judgmentReaderJSON.readAll(new File("test/pl/edu/agh/dataExtraction/empty.json")),
+                "W pliku /home/kariok/IdeaProjects/PO-Project-Court/test/pl/edu/agh/dataExtraction/empty.html" +
+                        " nie ma orzeczeń w formacie json");
     }
 
     @Test

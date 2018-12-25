@@ -14,8 +14,14 @@ public class JudgmentHTMLBuilder {
     private final Jspoon jspoon = Jspoon.create();
     private final HtmlAdapter<JudgmentHTML> adapter = jspoon.adapter(JudgmentHTML.class);
 
-    public Judgment buildJudgment(String htmlContent) {
-        var judgment = adapter.fromHtml(htmlContent);
+    public Judgment buildJudgment(String htmlContent) throws IllegalArgumentException{
+        JudgmentHTML judgment;
+        try {
+            judgment = adapter.fromHtml(htmlContent);
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException();
+        }
+        if(judgment == null) throw new IllegalArgumentException();
         judgment.setJudges(buildJudges(htmlContent));
         return judgment;
     }

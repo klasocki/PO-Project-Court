@@ -1,7 +1,10 @@
 package pl.edu.agh.commands;
 
+import pl.edu.agh.console.Arguments;
+import pl.edu.agh.dataExtraction.JudgmentReader;
 import pl.edu.agh.model.Judgment;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class CommandList {
@@ -11,6 +14,11 @@ public class CommandList {
     public CommandList(Map<String, Judgment> judgments, String outputFilePath) {
         this.judgments = judgments;
         this.outputFilePath = outputFilePath;
+    }
+
+    public static CommandList getCommandList(Arguments arguments) throws IOException, IllegalArgumentException {
+        Map<String, Judgment> judgments = JudgmentReader.getJudgments(arguments);
+        return new CommandList(judgments, arguments.outputFile);
     }
 
     public String[] getCommandList() {
