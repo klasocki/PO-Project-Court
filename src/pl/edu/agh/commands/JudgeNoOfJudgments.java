@@ -6,8 +6,8 @@ import pl.edu.agh.model.Judgment;
 import java.io.IOException;
 import java.util.Map;
 
-public class JudgeNoOfJudgments implements Command{
-    private String [] args;
+public class JudgeNoOfJudgments implements Command {
+    private String[] args;
     private Map<String, Judgment> judgments;
     private String outputFilePath;
 
@@ -22,7 +22,7 @@ public class JudgeNoOfJudgments implements Command{
         for (var judgment : judgments.values())
             for (var judge : judgment.getJudges())
                 if (judge.getName().equals(name)) number++;
-    return number;
+        return number;
     }
 
     @Override
@@ -31,11 +31,13 @@ public class JudgeNoOfJudgments implements Command{
             System.out.println(CommandList.expectsOneArgument());
         } else {
             var result = Integer.valueOf(getNumber(args[0])).toString();
-            try {
-                FileUtils.writeToFile(outputFilePath, "\n" + line + "\n" + result);
+            if (!result.equals("0")) {
+                try {
+                    FileUtils.writeToFile(outputFilePath, "\n" + line + "\n" + result);
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             System.out.println(result);
         }

@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 
 public class Main {
@@ -21,9 +22,9 @@ public class Main {
     public static void main(String[] args) {
 
         if (args.length < 2 || 3 < args.length) {
-            System.out.println("Wymagane co najmniej 2 i conajwyżej 3 atrybuty," +
-                    " podaj ścieżkę do folderu z orzeczeniami w formacie json, " +
-                    "ścieżkę do folderu z orzeczeniami w formacie html" +
+            System.out.println("Wymagane co najmniej 2 i conajwyżej 3 atrybuty\n" +
+                    " podaj ścieżkę do folderu z orzeczeniami w formacie json\n" +
+                    "ścieżkę do folderu z orzeczeniami w formacie html\n" +
                     " i opcjonalnie ścieżkę do pliku txt w którym mają być zapisywane wyniki komend");
             return;
         }
@@ -36,7 +37,7 @@ public class Main {
         }
         String outputFile = (3 == args.length) ? args[2] : DEV_NULL_PATH;
             try {
-                var initLog = "Sesja programu orzeczenia " + LocalDate.now() + "\n";
+                var initLog = "Sesja programu orzeczenia " + ZonedDateTime.now() + "\n";
                 Files.write(Paths.get(outputFile), initLog.getBytes());
         } catch (IOException e) {
             System.out.println("Problem z zapisem do pliku " + outputFile +

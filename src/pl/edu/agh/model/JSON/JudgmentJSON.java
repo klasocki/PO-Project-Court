@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jsoup.Jsoup;
 import pl.edu.agh.model.Judge;
 import pl.edu.agh.model.Judgment;
 import pl.edu.agh.model.ReferencedRegulation;
@@ -112,7 +113,7 @@ public class JudgmentJSON implements Serializable, Judgment
     }
 
     public String getTextContent() {
-        return textContent;
+        return Jsoup.parse(textContent).text();
     }
 
     public List<ReferencedRegulation> getReferencedRegulations() {

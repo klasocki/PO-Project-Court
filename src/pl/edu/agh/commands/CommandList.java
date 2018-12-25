@@ -31,7 +31,7 @@ public class CommandList {
                 "content     - zwraca uzasadnienie orzeczenia o podanej sygnaturze\n" +
                 "judge       - zwraca liczbę orzeczeń dla podanego imienia i nazwiska sędziego\n" +
                 "judges      - zwraca 10 sędziów o największej liczbie orzeczeń\n" +
-                "month       - zwraca rozkład statytstyczny orzeczeń ze względu na miesiąc\n" +
+                "months      - zwraca rozkład statytstyczny orzeczeń ze względu na miesiąc\n" +
                 "courts      - rozkład statystyczcny wyroków ze względu na typ sądu\n" +
                 "regulations - 10 najczęściej przywoływanych ustaw\n" +
                 "jury        - rozkład statystyczny wyroków ze względu na liczbę sędziów w składzie";
@@ -47,7 +47,7 @@ public class CommandList {
                 return new JudgeNoOfJudgments(args, judgments, outputFilePath);
             case "judges":
                 return new TopTenJudges(args, judgments, outputFilePath);
-            case "month":
+            case "months":
                 return new MonthStats(args, judgments, outputFilePath);
             case "courts":
                 return new CourtTypeStats(args, judgments, outputFilePath);

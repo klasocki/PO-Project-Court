@@ -1,6 +1,0 @@
-Czy nazwa paczki musi byc reverse dns - warto
-Co jest judgement, a co jest ruling
-Czy walidowac keywords, czy wystarczy String
-Co to znaczy edytować polecenia - muszą być opcje, trzeba móc poprawiać i informować o złym argumenycie
-Czy mogą być polecenia bez argumentów
-Co to jest rozkład statystyczny liczby sędziów na orzeczenie - ilość orzeczeń w których jest jeden sędzia, ilość w którym jest dwóch itd. (histogram)

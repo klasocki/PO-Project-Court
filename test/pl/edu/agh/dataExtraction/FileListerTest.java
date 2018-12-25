@@ -1,31 +1,14 @@
 package pl.edu.agh.dataExtraction;
 
-import fr.whimtrip.ext.jwhthtmltopojo.HtmlToPojoEngine;
-import fr.whimtrip.ext.jwhthtmltopojo.adapter.*;
-import fr.whimtrip.ext.jwhthtmltopojo.annotation.ReplaceWith;
-import fr.whimtrip.ext.jwhthtmltopojo.intrf.HtmlAdapter;
-import pl.droidsonroids.jspoon.Jspoon;
-import pl.droidsonroids.jspoon.annotation.*;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import org.jsoup.select.Selector;
+
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,7 +24,7 @@ class FileListerTest {
     @Test
     void listFilesTest() throws IOException {
         assertThrows(IllegalArgumentException.class, FileListerTest::wrongArgumentExecutable,
-                "No files in directory " + file + " end with: .txt");
+                "W folderze " + file + " nie ma plików kończących się na: .txt");
         File[] files = {
                 new File("jsonData/judgments-348.json"),
                 new File("jsonData/judgments-356.json"),
@@ -61,13 +44,9 @@ class FileListerTest {
 
     @Test
     void foo() throws IOException {
-        var s = "polecenie \"argumenty\" \"argumenty to jest tooo\" \"oo tak\" ";
-        /*for (var v : s.split("\\s")) {
-            System.out.println(v);
-        }*/
-        for (var q : s.split("\"")) {
-            System.out.println(q);
+       String[] tab = {"afs", "saff"} ;
+        for (var s : ArrayUtils.addAll(tab, "asf", "asff")) {
+            System.out.println(s);
         }
-
     }
 }

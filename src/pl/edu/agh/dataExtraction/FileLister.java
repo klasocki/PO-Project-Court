@@ -17,7 +17,8 @@ public class FileLister {
                 .toArray(File[]::new);
 
         if (filesFiltered.length == 0) {
-            throw new IllegalArgumentException("No files in directory " + folder + " end with: " + endingWith);
+            throw new IllegalArgumentException("W folderze " + folder +
+                    " nie ma plików kończących się na: " + endingWith);
         }
         return filesFiltered;
     }

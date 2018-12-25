@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jline.reader.*;
 import org.jline.reader.impl.completer.*;
@@ -30,7 +31,9 @@ class Shell {
             if (words.length == 0) System.out.println("Podaj nazwę komenty, wciśnij tab lub wpisz help aby uzyskać pomoc");
             String command = words[0].trim();
             var args = getCommandArguments(words);
-            switch (words[0]) {
+            switch (command) {
+                case "":
+                    break;
                 case "help":
                     printHelp();
                     break;
@@ -61,7 +64,8 @@ class Shell {
     private LineReader prepareLineReader() {
         LineReaderBuilder readerBuilder = LineReaderBuilder.builder();
         var completers = new LinkedList<Completer>();
-        completers.add(new StringsCompleter(commandList.getCommandList()));
+        String[] comList = ArrayUtils.addAll(commandList.getCommandList(), "help", "exit");
+        completers.add(new StringsCompleter(comList ));
         readerBuilder.completer(new ArgumentCompleter(completers));
         return readerBuilder.build();
     }
@@ -73,7 +77,7 @@ class Shell {
     private void printHelp() {
         System.out.println("Komendy wymagające argumentów przyjmują je jako " +
                 "ciagi znaków zawarte w cudzysłowach, oddzielone białym znakiem");
-        System.out.println("help		- Pokaż pomoc");
+        System.out.println("help        - Pokaż pomoc");
         System.out.println("exit        - Wyjdź z aplikacji");
         System.out.println(commandList.helpMessage());
     }
