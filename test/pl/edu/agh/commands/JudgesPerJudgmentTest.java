@@ -23,6 +23,15 @@ class JudgesPerJudgmentTest {
         var reader = new JudgmentReaderJSON();
         judgments = reader.readAll(FileLister.listFiles("jsonData", ".json"));
         command = new JudgesPerJudgment(new String[]{} ,judgments, "");
-        System.out.println(command.getStats());
+        expected = "Liczba orzeczeń wydanych przez skład z określoną liczbą sędziów\n" +
+                "3: 443\n" +
+                "1: 436\n" +
+                "0: 85\n" +
+                "2: 10\n" +
+                "5: 7\n" +
+                "7: 2\n" +
+                "13: 1\n" +
+                "15: 1\n";
+        assertEquals(command.getStats(), expected);
     }
 }

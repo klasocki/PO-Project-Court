@@ -1,8 +1,5 @@
 package pl.edu.agh.dataExtraction;
 
-
-
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -42,11 +39,4 @@ class FileListerTest {
         assertTrue(fileList.containsAll(filesRead));
     }
 
-    @Test
-    void foo() throws IOException {
-       String[] tab = {"afs", "saff"} ;
-        for (var s : ArrayUtils.addAll(tab, "asf", "asff")) {
-            System.out.println(s);
-        }
-    }
 }

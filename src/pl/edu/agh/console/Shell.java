@@ -2,15 +2,13 @@ package pl.edu.agh.console;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jline.reader.*;
 import org.jline.reader.impl.completer.*;
-import pl.edu.agh.commands.Command;
 import pl.edu.agh.commands.CommandList;
-import pl.edu.agh.model.Judgment;
+
 
 
 class Shell {

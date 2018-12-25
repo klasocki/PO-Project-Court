@@ -59,13 +59,13 @@ public class CommandList {
         return new CommandNotFound();
     }
 
-    public static String expectsNoArguments() {
+    static String expectsNoArguments() {
         return "Podano zbyt dużo argumentów, komenda nie wymaga żadnego";
     }
-    public static String expectsOneOrMoreArguments() {
+    static String expectsOneOrMoreArguments() {
         return "Nie podano argumentów, wymagany jeden lub więcej, zawarte pomiędzy znakami \"";
     }
-    public static String expectsOneArgument() {
+    static String expectsOneArgument() {
         return "Podano złą liczbę argumentów, komenda wymaga dokładnie jednego, zawartego pomiędzy znakami \"";
     }
 

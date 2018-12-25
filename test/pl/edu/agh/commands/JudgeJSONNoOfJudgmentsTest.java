@@ -13,7 +13,8 @@ class JudgeJSONNoOfJudgmentsTest {
         var judgments = TestFileReader.read();
         JudgeNoOfJudgments jnoCommand = new JudgeNoOfJudgments(new String[]{} ,judgments, "");
         assertEquals(1, jnoCommand.getNumber("Kazimierz Buchała"));
-        assertEquals(0, jnoCommand.getNumber("faopijfef09"));
+        assertThrows(IllegalArgumentException.class, () -> jnoCommand.getNumber("faopijfef09"),
+                "Sędzia faopijfef09 nie wydał żadnego orzeczenia przechowywanego w podanych plikach");
     }
 
 }
