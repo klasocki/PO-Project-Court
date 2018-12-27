@@ -11,7 +11,7 @@ public class CommandList {
     private Map<String, Judgment> judgments;
     private String outputFilePath;
 
-    public CommandList(Map<String, Judgment> judgments, String outputFilePath) {
+    private CommandList(Map<String, Judgment> judgments, String outputFilePath) {
         this.judgments = judgments;
         this.outputFilePath = outputFilePath;
     }

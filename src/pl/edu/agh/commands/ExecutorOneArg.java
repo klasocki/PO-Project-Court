@@ -4,16 +4,13 @@ import java.util.function.Function;
 
 public class ExecutorOneArg implements Executor<String> {
     @Override
-    public void execute(String line, Function<String, String> getResult, String[] args, String outputFilePath) {
+    public void execute(String line, Function<String, String> getResult, String[] args,
+                        String outputFilePath) throws IllegalArgumentException {
         if (args.length != 1) {
-            System.out.println(CommandList.expectsOneArgument());
+            throw new IllegalArgumentException(CommandList.expectsOneArgument());
         } else {
-            try {
-                String result = getResult.apply(args[0]);
-                printResult(line, outputFilePath, result);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+            String result = getResult.apply(args[0]);
+            printAndSaveResult(line, outputFilePath, result);
         }
     }
 }

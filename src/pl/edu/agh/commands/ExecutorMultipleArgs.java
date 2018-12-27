@@ -4,16 +4,13 @@ import java.util.function.Function;
 
 public class ExecutorMultipleArgs implements Executor<String[]>{
 
-    public void execute(String line, Function<String[], String> getResult, String[] args, String outputFilePath) {
+    public void execute(String line, Function<String[], String> getResult,
+                        String[] args, String outputFilePath) throws IllegalArgumentException {
         if (args.length < 1) {
-            System.out.println(CommandList.expectsOneOrMoreArguments());
+            throw new IllegalArgumentException(CommandList.expectsOneOrMoreArguments());
         } else {
-            try {
-                String result = getResult.apply(args);
-                printResult(line, outputFilePath, result);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+            String result = getResult.apply(args);
+            printAndSaveResult(line, outputFilePath, result);
         }
     }
 

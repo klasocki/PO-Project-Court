@@ -12,14 +12,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class JudgmentReaderJSON implements JudgmentReader{
-    Judgment readSingle(File file, int index)
-            throws IOException, IndexOutOfBoundsException, IllegalArgumentException{
-        var gson = new Gson();
-        var jsonArray = readJsonArray(file);
-        return gson.fromJson(jsonArray.get(index), JudgmentJSON.class);
-}
-
+public class JudgmentReaderJSON implements JudgmentReader {
     public Map<String, Judgment> readAll(File file) throws IOException, IllegalArgumentException{
         var gson = new Gson();
         var jsonArray = readJsonArray(file);
@@ -51,5 +44,12 @@ public class JudgmentReaderJSON implements JudgmentReader{
             }
             return jsonArray;
         }
+    }
+
+    Judgment readSingle(File file, int index)
+            throws IOException, IndexOutOfBoundsException, IllegalArgumentException{
+        var gson = new Gson();
+        var jsonArray = readJsonArray(file);
+        return gson.fromJson(jsonArray.get(index), JudgmentJSON.class);
     }
 }

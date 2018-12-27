@@ -17,15 +17,15 @@ public class Rubrum implements Command {
         this.outputFilePath = outputFilePath;
     }
 
-    String getRubrum(String key) {
+    String getRubrum(String key) throws IllegalArgumentException{
         var judgement = judgements.get(key);
         if (judgement == null) {
             throw new IllegalArgumentException("Nie znaleziono orzeczenia o sygnaturze " + key);
         }
         var builder = new StringBuilder();
         for (var judge : judgement.getJudges()) {
-            builder.append("\n").append(judge.getName()).append(" - ");
-            var prefix = "";
+            builder.append("\n").append(judge.getName());
+            var prefix = " - ";
             for (var role : judge.getSpecialRoles()) {
                 builder.append(prefix).append(role);
                 prefix = ", ";

@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JudgmentReaderJSONTest {
+class JudgmentReaderJSONTest {
     private final File testFile = new File("test/pl/edu/agh/dataExtraction/testJudgement.json");
 
     @Test
@@ -27,16 +27,14 @@ public class JudgmentReaderJSONTest {
     @Test
     void readExcTest() {
         JudgmentReaderJSON judgmentReaderJSON = new JudgmentReaderJSON();
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            judgmentReaderJSON.readSingle(testFile, 1);
-        });
-        assertThrows(FileNotFoundException.class, () -> {
-            judgmentReaderJSON.readSingle(new File("filefilehey.json"), 0);
-        });
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                judgmentReaderJSON.readSingle(testFile, 1));
+        assertThrows(FileNotFoundException.class, () ->
+                judgmentReaderJSON.readSingle(new File("filefilehey.json"), 0));
 
         assertThrows(IllegalArgumentException.class,
                 () -> judgmentReaderJSON.readAll(new File("test/pl/edu/agh/dataExtraction/empty.json")),
-                "W pliku /home/kariok/IdeaProjects/PO-Project-Court/test/pl/edu/agh/dataExtraction/empty.html" +
+                "W pliku /home/kariok/IdeaProjects/PO-Project-Court/test/pl/edu/agh/dataExtraction/empty.json" +
                         " nie ma orzeczeń w formacie json");
     }
 

@@ -22,7 +22,8 @@ public class JudgeNoOfJudgments implements Command {
             for (var judge : judgment.getJudges())
                 if (judge.getName().equals(name)) number++;
         if (0 == number) {
-            throw new IllegalArgumentException("Sędzia " + name + " nie wydał żadnego orzeczenia przechowywanego w podanych plikach");
+            throw new IllegalArgumentException("Sędzia " + name +
+                    " nie wydał żadnego orzeczenia przechowywanego w podanych plikach");
         }
         return number;
     }

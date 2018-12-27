@@ -11,16 +11,16 @@ import pl.edu.agh.commands.CommandList;
 
 class Shell {
     private CommandList commandList;
-    private final String promptMessage = "orzeczenia";
 
     Shell(CommandList commandList) {
         this.commandList = commandList;
     }
 
     void run() {
+        String promptMessage = "orzeczenia";
+
         printWelcomeMessage();
         LineReader reader = prepareLineReader();
-
         String line;
         while ((line = readLine(reader, promptMessage)) != null) {
             var words = line.split("\"");
@@ -54,16 +54,11 @@ class Shell {
 
     private void parseAndExecute(String command, String[] args, String line) {
         var com = commandList.parseCommand(command, args);
-        com.execute(line);
-    }
-
-    private LineReader prepareLineReader() {
-        LineReaderBuilder readerBuilder = LineReaderBuilder.builder();
-        var completers = new LinkedList<Completer>();
-        String[] comList = ArrayUtils.addAll(commandList.getCommandList(), "help", "exit");
-        completers.add(new StringsCompleter(comList ));
-        readerBuilder.completer(new ArgumentCompleter(completers));
-        return readerBuilder.build();
+        try {
+            com.execute(line);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void printWelcomeMessage() {
@@ -78,9 +73,9 @@ class Shell {
         System.out.println(commandList.helpMessage() + "\n");
     }
 
-    private String readLine(LineReader reader, String promtMessage) {
+    private String readLine(LineReader reader, String promptMessage) {
         try {
-            String line = reader.readLine(promtMessage + " > ");
+            String line = reader.readLine(promptMessage + " > ");
             return line.trim();
         } catch (UserInterruptException e) {
             // e.g. ^C
@@ -91,6 +86,15 @@ class Shell {
             System.err.println("Reading line interrupted");
             return null;
         }
+    }
+
+    private LineReader prepareLineReader() {
+        LineReaderBuilder readerBuilder = LineReaderBuilder.builder();
+        var completers = new LinkedList<Completer>();
+        String[] comList = ArrayUtils.addAll(commandList.getCommandList(), "help", "exit");
+        completers.add(new StringsCompleter(comList ));
+        readerBuilder.completer(new ArgumentCompleter(completers));
+        return readerBuilder.build();
     }
 
 }

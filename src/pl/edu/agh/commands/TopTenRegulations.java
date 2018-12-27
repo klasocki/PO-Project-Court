@@ -1,6 +1,6 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.MapUtils;
+import pl.edu.agh.dataExtraction.MapUtils;
 import pl.edu.agh.model.Judgment;
 
 import java.util.HashMap;
@@ -26,7 +26,6 @@ public class TopTenRegulations implements Command {
                 mapUtils.incrValue(regulationsJudgementCount, regulation.getJournalTitle());
             }
         }
-
         return "Najczęściej przywoływane ustawy\n" +
                 mapUtils.topValuesToString(10, " - ", regulationsJudgementCount);
     }

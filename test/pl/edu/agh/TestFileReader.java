@@ -13,7 +13,7 @@ public class TestFileReader {
         return read(testFile);
     }
 
-    public static Map<String, Judgment> read(File testFile) throws IOException {
+    private static Map<String, Judgment> read(File testFile) throws IOException {
         var reader = new JudgmentReaderJSON();
         return reader.readAll(testFile);
     }

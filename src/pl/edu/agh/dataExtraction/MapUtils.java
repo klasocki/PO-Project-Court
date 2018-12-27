@@ -1,4 +1,6 @@
-package pl.edu.agh.model;
+package pl.edu.agh.dataExtraction;
+
+import pl.edu.agh.model.Judgment;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -10,7 +12,7 @@ import static java.util.Collections.reverseOrder;
 
 public class MapUtils<K, V> {
 
-    public Map<K, Integer> getTopValues(Map<K, Integer> map, int n) {
+    private Map<K, Integer> getTopValues(Map<K, Integer> map, int n) {
         return map.entrySet().stream().sorted(reverseOrder(Map.Entry.comparingByValue())).limit(n)
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
@@ -19,7 +21,8 @@ public class MapUtils<K, V> {
         map.merge(key, 1, Integer::sum);
     }
 
-    public String getStringTopValues(Map<String, Judgment> judgments, Function<Judgment, K> getKeyValue,  int n, String separator) {
+    public String getValuesWithMostJudgments(Map<String, Judgment> judgments,
+                                             Function<Judgment, K> getKeyValue, int n, String separator) {
 
         Map<K, Integer> judgmentsKeyCount = new HashMap<>();
         for (var judgment : judgments.values()) {

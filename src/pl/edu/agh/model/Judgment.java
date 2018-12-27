@@ -1,8 +1,5 @@
 package pl.edu.agh.model;
 
-import pl.edu.agh.model.JSON.JudgeJSON;
-import pl.edu.agh.model.JSON.ReferencedRegulationJSON;
-
 import java.time.LocalDate;
 import java.util.List;
 

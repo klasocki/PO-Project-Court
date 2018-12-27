@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MonthStatsTest {
     @Test
-    public void getStatsTest() throws IOException {
+    void getStatsTest() throws IOException {
         var judgments = TestFileReader.read();
         var command = new MonthStats(new String[]{} ,judgments, "");
         var expected = "Liczba orzeczeń w poszczególnych miesiacach (z uwzględnieniem wszystkich lat) \n" +

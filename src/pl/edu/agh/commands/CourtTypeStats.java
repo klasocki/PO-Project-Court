@@ -1,6 +1,6 @@
 package pl.edu.agh.commands;
 
-import pl.edu.agh.model.MapUtils;
+import pl.edu.agh.dataExtraction.MapUtils;
 import pl.edu.agh.model.Judgment;
 
 import java.util.Map;
@@ -21,12 +21,12 @@ public class CourtTypeStats implements Command {
         var mapUtils = new MapUtils<String, Integer>(); //helper object
         //Max value used to list "infinity" top values
         return  "Liczba orzeczeń danego typu sądu\n"
-                + mapUtils.getStringTopValues(judgments, Judgment::getCourtType, Integer.MAX_VALUE, ": ");
-
+                + mapUtils.getValuesWithMostJudgments(judgments, Judgment::getCourtType,
+                Integer.MAX_VALUE, ": ");
     }
 
     @Override
-    public void execute(String line) {
+    public void execute(String line) throws IllegalArgumentException {
         executor.execute(line, s -> getStats(), args, outputFilePath);
     }
 }
